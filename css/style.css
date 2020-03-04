@@ -916,11 +916,11 @@ ul.portfolioContainer li:hover span.hoverBox .linKed{
 }
 
 .card-body {
-	background-color: white;
+	background-color: #474d8d;
 	border: 1px;
 	border-style: solid;
 	border-color: #69696980;
-	color: black;
+	color: white;
 }
 
 .card-title {
@@ -1073,7 +1073,7 @@ ul.portfolioContainer li:hover span.hoverBox .linKed{
 }
 
 .conForm textarea{
-	background:#585f73;
+	background:#7d7e81;
 	color:#93959c;
 	padding:15px 30px;
 	border:none;
