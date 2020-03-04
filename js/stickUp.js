@@ -70,7 +70,8 @@ function($) {
 			if(menuSize != null){
 				for(var i=0;i < menuSize;i++)
 				{
-					contentTop[i] = $('#'+content[i]+'').offset().top;
+					if ($('#' + content[i] + '').offset())
+						contentTop[i] = $('#'+content[i]+'').offset().top;
 					function bottomView(i) {
 						contentView = $('#'+content[i]+'').height()*.4;
 						testView = contentTop[i] - contentView;

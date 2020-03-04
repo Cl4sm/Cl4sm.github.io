@@ -475,6 +475,11 @@ header{
 	text-decoration:none;
 }
 
+.bntDownload:visited{
+	color:#FFFFFF;
+	text-decoration:none;
+}
+
 
 
 /*----------------------------------------------------
@@ -904,6 +909,36 @@ ul.portfolioContainer li:hover span.hoverBox .linKed{
     transition-property: transform, opacity;
 }
 
+
+.card {
+	border-radius: 2%;
+	border: 1px;
+}
+
+.card-body {
+	background-color: white;
+	border: 1px;
+	border-style: solid;
+	border-color: #69696980;
+	color: black;
+}
+
+.card-title {
+	font-weight: 600;
+	padding-left: 5%;
+	padding-top: 2%;
+	font-size: 1.5em;
+
+}
+
+.card-text {
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+.card-text>a {
+	color: #2bb3dd;
+}
 
 
 
