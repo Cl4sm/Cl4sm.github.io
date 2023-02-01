@@ -1,132 +1,59 @@
-# Site
-repository: WGibbs15/WGibbs15.github.io
-# favicon: Directory of your favicon (eg. images/favicon.ico)(optional)
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+#
+# If you need help with YAML syntax, here are some quick references for you:
+# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
+# https://learnxinyminutes.com/docs/yaml/
+#
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
 
-# Content configuration version
-version: 2
-
-# Personal info
-name: Wil Gibbs
-title: ASU PhD Research Assistant
-email: wfgibbs@asu.edu
-# email_title: Email (Email title override)
-#phone: Your phone number (optional)
-# phone_title: Phone (Phone title override)
-# website: https://wil-gibbs.com/
-# website_title: Web (Website title override)
-
-# Dark Mode (true/false/never)
-darkmode: true
-
-# Social links
+title: Wil Gibbs
+email: wil@wilgibbs.com
+description: >- # this means to ignore newlines until "baseurl:"
+  Wil Gibbs, an Arizona State University Ph.D. Student working on Binary Analysis at SEFCOM.
+baseurl: "/" # the subpath of your site, e.g. /blog
+url: "https://wilgibbs.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: cl4sm
-github_username:  WGibbs15
-#stackoverflow_username: "00000001"
-#dribbble_username: jekyll
-#facebook_username: jekyll
-#flickr_username: jekyll
-#instagram_username: jekyll
-linkedin_username: william-gibbs-14b61311a
-#xing_username: jekyll
-#pinterest_username: jekyll
-#youtube_username: jekyll
-#googleplus_username: +jekyll
-#orcid_username: 0000-0000-0000-0000
-
-# Additional icon links
-#additional_links:
-#- title: Link name
-#  icon: Font Awesome brand icon name (eg. fab fa-twitter) (https://fontawesome.com/icons?d=gallery&s=brands&m=free)
-#  url: Link url (eg. https://google.com)
-# - title: another link
-#   icon: font awesome brand icon name (eg. fab fa-twitter) (https://fontawesome.com/icons?d=gallery&s=brands&m=free)
-#   url: Link url (eg. https://google.com)
-
-# Google Analytics and Tag Manager
-# Using more than one of these may cause issues with reporting
-# gtm: "GTM-0000000"
-# gtag: "UA-00000000-0"
-# google_analytics: "UA-00000000-0"
-
-# About Section
-# about_title: About Me (Use this to override about section title)
-about_profile_image: images/profile.jpg
-about_content: | # this will include new lines to allow paragraphs
-  I am currently a research assistant at ASU's SEFCOM, working on applying Reaching Definition Analysis to discover potential command injections in executables. My previous research includes topics in the mobile space. Specifically, how native libraries are used in Android applications and their security mechanisms. I also lead a Capture The Flag (CTF) team, Shellphish, which participates in many cyber-security challenges and competitions throughout the year. 
-
-  Checkout my printable resume <a href="resume/resume.pdf">here</a>!
-content:
-  #- title: Projects # Title for the section
-  #  layout: list # Type of content section (list/text)
-  #  content:
-  #    - layout: left
-  #      title: Project name
-  #      link: Link to project (eg. sproogen.github.io/modern-resume-theme)(optional)
-  #      link_text: Link Text
-  #      additional_links:
-  #        - title:  Github page for project (eg. sproogen/modern-resume-theme)
-  #          icon: fab fa-github
-  #          url: Link to project (eg. sproogen.github.io/modern-resume-theme)(optional)
-  #        - title:  Github page for project (eg. sproogen/modern-resume-theme)
-  #          icon: fab fa-github
-  #          url: Link to project (eg. sproogen.github.io/modern-resume-theme)(optional)
-  #      quote: >
-  #        Short overview of the project (optional)
-  #      description: | # this will include new lines to allow paragraphs
-  #        Description about the work on/with the project
-  - title: Education
-    layout: list
-    content:
-      - layout: top-right
-        title: Arizona State University
-        sub_title: BA Computer Science
-        caption: 2015-2018
-        quote: >
-          I graduated with a focus on Cyber Security as well with an honors degree from Barrett the Honors College.
-        description: | # this will include new lines to allow paragraphs
-          Bachelors Degree in Computer Science 
-      - layout: top-right
-        title: Arizona State University
-        sub_title: MS Computer Science
-        caption: 2018-2020
-        quote: >
-          My thesis for this degree is "Who Killed The Canary: An Exploration Into Native Android Security Protections"
-        description: | # this will include new lines to allow paragraphs
-          Masters of science for Computer Science 
-      - layout: top-right
-        title: Arizona State University
-        sub_title: PhD Computer Science
-        caption: 2020-Present
-        description: | # this will include new lines to allow paragraphs
-          Doctorate in Computer Science
-
-  - title: 
-    layout: text
-
-# Footer
-footer_show_references: true
-# references_title: References on request (Override references text)
+github_username:  cl4sm
 
 # Build settings
-# theme: modern-resume-theme (Use this is you are hosting your resume yourself)
-remote_theme: sproogen/modern-resume-theme (Use this if you are hosting your resume on GitHub)
+theme: jekyll-theme-console
 
-sass:
-  sass_dir: _sass
-  style: compressed
+style: dark
+listen_for_clients_preferred_style: true 
 
-plugins:
- - jekyll-seo-tag
+header_pages:
+  - index.md
 
-exclude : [
-  "Gemfile",
-  "Gemfile.lock",
-  "node_modules",
-  "vendor/bundle/",
-  "vendor/cache/",
-  "vendor/gems/",
-  "vendor/ruby/",
-  "lib/",
-  "scripts/",
-  "docker-compose.yml",
-  ]
+footer: '<a href="https://twitter.com/cl4sm">twitter</a> | <a href="https://github.com/cl4sm">github</a> | <a href="./resume/resume.pdf">cv</a> | wil@wilgibbs.com'
+
+# Exclude from processing.
+# The following items will not be processed, by default.
+# Any item listed under the `exclude:` key here will be automatically added to
+# the internal "default list".
+#
+# Excluded items can be processed by explicitly listing the directories or
+# their entries' file path in the `include:` list.
+#
+# exclude:
+#   - .sass-cache/
+#   - .jekyll-cache/
+#   - gemfiles/
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules/
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
