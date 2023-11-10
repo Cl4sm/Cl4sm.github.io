@@ -29,10 +29,14 @@ I'm **Wil Gibbs** - a Ph.D. student at Airzona State University (ASU) interested
 When I’m not doing Research, I am competing in ethical hacking competitions called CTFs! I am the captain of the internationally known CTF team [Shellphish](https://shellphish.net/) which routinely competes in DEFCON CTF (and has continue to have done so during my time as captain). I started the ASU based CTF team *pwndevils* which has transitioned into the [ASU Hacking Club](http://asuhacking.club/) and pipelines talented hackers directly into Shellphish. I try my best at pwn and rev based challenges (with a sprinkle of web) under the handle *clasm* when competing.
 
 # Publications
+## [Ahoy SAILR! There is No Need to DREAM of C: A Compiler-Aware Structuring Algorithm for Binary Decompilation](https://www.zionbasque.com/files/publications/sailr_usenix24.pdf)
+Zion Leonahenahe Basque, Ati Priya Bajaj, **Wil Gibbs**, Jude O’Kain, Derron Miao, Tiffany Bao, Adam Doupé, Yan Shoshitaishvili, Ruoyu Wang  
+_Proceedings of the USENIX Security Symposium, Philadelphia, USA August 2024._
+[github](https://github.com/mahaloz/angr-sailr)
 
 ## [Greenhouse: Single-Service Rehosting of Linux-Based Firmware Binaries in User-Space Emulation](https://www.usenix.org/system/files/usenixsecurity23-tay.pdf)
-### Hui Jun Tay, Kyle Zeng, Jayakrishna Menon Vadayath, Arvind S Raj, Audrey Dutcher, Tejesh Reddy, **Wil Gibbs**, Zion Leonahenahe Basque, Fangzhou Dong, Zack Smith, Adam Doupé, Tiffany Bao, Yan Shoshitaishvili, Ruoyu Wang 
-### _Proceedings of the USENIX Security Symposium, Anaheim, USA August 2023._
+Hui Jun Tay, Kyle Zeng, Jayakrishna Menon Vadayath, Arvind S Raj, Audrey Dutcher, Tejesh Reddy, **Wil Gibbs**, Zion Leonahenahe Basque, Fangzhou Dong, Zack Smith, Adam Doupé, Tiffany Bao, Yan Shoshitaishvili, Ruoyu Wang  
+_Proceedings of the USENIX Security Symposium, Anaheim, USA August 2023._
 [github](https://github.com/sefcom/Greenhouse)
 ```latex
 @inproceedings{tay2023greenhouse,
