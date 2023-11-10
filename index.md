@@ -28,10 +28,26 @@ I'm **Wil Gibbs** - a Ph.D. student at Airzona State University (ASU) interested
 
 When I’m not doing Research, I am competing in ethical hacking competitions called CTFs! I am the captain of the internationally known CTF team [Shellphish](https://shellphish.net/) which routinely competes in DEFCON CTF (and has continue to have done so during my time as captain). I started the ASU based CTF team *pwndevils* which has transitioned into the [ASU Hacking Club](http://asuhacking.club/) and pipelines talented hackers directly into Shellphish. I try my best at pwn and rev based challenges (with a sprinkle of web) under the handle *clasm* when competing.
 
+# Publications
+
+## [Greenhouse: Single-Service Rehosting of Linux-Based Firmware Binaries in User-Space Emulation](https://www.usenix.org/system/files/usenixsecurity23-tay.pdf)
+### Hui Jun Tay, Kyle Zeng, Jayakrishna Menon Vadayath, Arvind S Raj, Audrey Dutcher, Tejesh Reddy, **Wil Gibbs**, Zion Leonahenahe Basque, Fangzhou Dong, Zack Smith, Adam Doupé, Tiffany Bao, Yan Shoshitaishvili, Ruoyu Wang 
+### _Proceedings of the USENIX Security Symposium, Anaheim, USA August 2023._
+[github](https://github.com/sefcom/Greenhouse)
+```latex
+@inproceedings{tay2023greenhouse,
+  title={Greenhouse:$\{$Single-Service$\}$ Rehosting of $\{$Linux-Based$\}$ Firmware Binaries in $\{$User-Space$\}$ Emulation},
+  author={Tay, Hui Jun and Zeng, Kyle and Vadayath, Jayakrishna Menon and Raj, Arvind S and Dutcher, Audrey and Reddy, Tejesh and Gibbs, Wil and Basque, Zion Leonahenahe and Dong, Fangzhou and Smith, Zack and others},
+  booktitle={32nd USENIX Security Symposium (USENIX Security 23)},
+  pages={5791--5808},
+  year={2023}
+}
+```
 
 # Honors and Awards
 
-- Partial Win in NAS Category at Pwn2Own (Captain of ASU SEFCOM), Toronto, Canada, 2022 
+- Partial Win in Camera Category at Pwn2Own (SEFCOM), Toronto, Canada, 2023 
+- Partial Win in NAS Category at Pwn2Own (SEFCOM), Toronto, Canada, 2022 
 - 13th Place in DEF CON 30 CTF (Shellphish), Las Vegas, USA, 2022 
 - 14th Place in DEF CON 29 CTF (Shellphish), Las Vegas, USA, 2021 
 - 7th Place in DEF CON 28 CTF (Shellphish), Virtual, 2020 
