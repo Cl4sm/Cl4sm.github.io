@@ -31,12 +31,12 @@ When I’m not doing Research, I am competing in ethical hacking competitions ca
 # Publications
 ## [Ahoy SAILR! There is No Need to DREAM of C: A Compiler-Aware Structuring Algorithm for Binary Decompilation](https://www.zionbasque.com/files/publications/sailr_usenix24.pdf)
 Zion Leonahenahe Basque, Ati Priya Bajaj, **Wil Gibbs**, Jude O’Kain, Derron Miao, Tiffany Bao, Adam Doupé, Yan Shoshitaishvili, Ruoyu Wang  
-_Proceedings of the USENIX Security Symposium, Philadelphia, USA August 2024._
+_Proceedings of the USENIX Security Symposium, Philadelphia, USA August 2024._  
 [github](https://github.com/mahaloz/angr-sailr)
 
 ## [Greenhouse: Single-Service Rehosting of Linux-Based Firmware Binaries in User-Space Emulation](https://www.usenix.org/system/files/usenixsecurity23-tay.pdf)
 Hui Jun Tay, Kyle Zeng, Jayakrishna Menon Vadayath, Arvind S Raj, Audrey Dutcher, Tejesh Reddy, **Wil Gibbs**, Zion Leonahenahe Basque, Fangzhou Dong, Zack Smith, Adam Doupé, Tiffany Bao, Yan Shoshitaishvili, Ruoyu Wang  
-_Proceedings of the USENIX Security Symposium, Anaheim, USA August 2023._
+_Proceedings of the USENIX Security Symposium, Anaheim, USA August 2023._  
 [github](https://github.com/sefcom/Greenhouse)
 ```latex
 @inproceedings{tay2023greenhouse,
