@@ -35,8 +35,8 @@ _Proceedings of the USENIX Security Symposium, Philadelphia, USA August 2024._
 [github](https://github.com/mahaloz/angr-sailr)
 
 ## [Greenhouse: Single-Service Rehosting of Linux-Based Firmware Binaries in User-Space Emulation](https://www.usenix.org/system/files/usenixsecurity23-tay.pdf)
-Hui Jun Tay, Kyle Zeng, Jayakrishna Menon Vadayath, Arvind S Raj, Audrey Dutcher, Tejesh Reddy, **Wil Gibbs**, Zion Leonahenahe Basque, Fangzhou Dong, Zack Smith, Adam Doupé, Tiffany Bao, Yan Shoshitaishvili, Ruoyu Wang  
-_Proceedings of the USENIX Security Symposium, Anaheim, USA August 2023._  
+Hui Jun Tay, Kyle Zeng, Jayakrishna Menon Vadayath, Arvind S Raj, Audrey Dutcher, Tejesh Reddy, **Wil Gibbs**, Zion Leonahenahe Basque, Fangzhou Dong, Zack Smith, Adam Doupé, Tiffany Bao, Yan Shoshitaishvili, Ruoyu Wang
+_Proceedings of the USENIX Security Symposium, Anaheim, USA August 2023._
 [github](https://github.com/sefcom/Greenhouse)
 ```latex
 @inproceedings{tay2023greenhouse,
