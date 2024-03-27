@@ -29,16 +29,21 @@ I'm **Wil Gibbs** - a Ph.D. student at Airzona State University (ASU) interested
 When I’m not doing Research, I am competing in ethical hacking competitions called CTFs! I am the captain of the internationally known CTF team [Shellphish](https://shellphish.net/) which routinely competes in DEFCON CTF (and has continue to have done so during my time as captain). I started the ASU based CTF team *pwndevils* which has transitioned into the [ASU Hacking Club](http://asuhacking.club/) and pipelines talented hackers directly into Shellphish. I try my best at pwn and rev based challenges (with a sprinkle of web) under the handle *clasm* when competing.
 
 # Publications
+## [Operation Mango: Scalable Discovery of Taint-Style Vulnerabilities in Binary Firmware Services](./papers/mango_usenix24.pdf)
+**Wil Gibbs**, Arvind S Raj, Jayakrishna Menon Vadayath, Hui Jun Tay, Justin Miller, Akshay Ajayan, Zion Leonahenahe Basque, Audrey Dutcher, Fangzhou Dong, Xavier Maso, Giovanni Vigna, Christopher Kruegel, Adam Doupé, Yan Shoshitaishvili, Ruoyu Wang
+_Proceedings of the USENIX Security Symposium, Philadelphia, USA August 2024._
+[github](https://github.com/sefcom/operation-mango-public)
+
 ## [Ahoy SAILR! There is No Need to DREAM of C: A Compiler-Aware Structuring Algorithm for Binary Decompilation](https://www.zionbasque.com/files/publications/sailr_usenix24.pdf)
 Zion Leonahenahe Basque, Ati Priya Bajaj, **Wil Gibbs**, Jude O’Kain, Derron Miao, Tiffany Bao, Adam Doupé, Yan Shoshitaishvili, Ruoyu Wang
 _Proceedings of the USENIX Security Symposium, Philadelphia, USA August 2024._
-[github](https://github.com/mahaloz/angr-sailr)
+[github](https://github.com/mahaloz/angr-sailr) [pdf mirror](./papers/sailr_usenix24.pdf)
 
 ## [Greenhouse: Single-Service Rehosting of Linux-Based Firmware Binaries in User-Space Emulation](https://www.usenix.org/system/files/usenixsecurity23-tay.pdf)
 Hui Jun Tay, Kyle Zeng, Jayakrishna Menon Vadayath, Arvind S Raj, Audrey Dutcher, Tejesh Reddy, **Wil Gibbs**, Zion Leonahenahe Basque, Fangzhou Dong, Zack Smith, Adam Doupé, Tiffany Bao, Yan Shoshitaishvili, Ruoyu Wang
 _Proceedings of the USENIX Security Symposium, Anaheim, USA August 2023._
-[github](https://github.com/sefcom/Greenhouse)
-```latex
+[github](https://github.com/sefcom/Greenhouse) [pdf mirror](./papers/usenixsecurity23-tay.pdf)
+<!--```latex
 @inproceedings{tay2023greenhouse,
   title={Greenhouse:$\{$Single-Service$\}$ Rehosting of $\{$Linux-Based$\}$ Firmware Binaries in $\{$User-Space$\}$ Emulation},
   author={Tay, Hui Jun and Zeng, Kyle and Vadayath, Jayakrishna Menon and Raj, Arvind S and Dutcher, Audrey and Reddy, Tejesh and Gibbs, Wil and Basque, Zion Leonahenahe and Dong, Fangzhou and Smith, Zack and others},
@@ -46,7 +51,7 @@ _Proceedings of the USENIX Security Symposium, Anaheim, USA August 2023._
   pages={5791--5808},
   year={2023}
 }
-```
+``` -->
 
 # Honors and Awards
 
