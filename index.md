@@ -34,6 +34,11 @@ When I’m not doing Research, I am competing in ethical hacking competitions ca
 _Proceedings of the USENIX Security Symposium, Philadelphia, USA August 2024._
 [github](https://github.com/sefcom/operation-mango-public)
 
+## [Fuzz to the Future: Uncovering Occluded Future Vulnerabilities via Robust Fuzzing](https://sefcom.asu.edu/publications/flakjack-ccs24.pdf)
+Arvind S Raj, **Wil Gibbs**, Fangzhou Dong, Jayakrishna Menon Vadayath, Michael Tompkins, Steven Wirsz, Yibo Liu, Zhenghao Hu, Chang Zhu, Gokulkrishna Praveen Menon, Brendan Dolan-Gavitt, Adam Doupé, Ruoyu Wang, Yan Shoshitaishvili, Tiffany Bao
+_Proceedings of the ACM Computing Classification System, Utah, USA October 2024._
+[github](https://github.com/sefcom/flakjack)
+
 ## [Ahoy SAILR! There is No Need to DREAM of C: A Compiler-Aware Structuring Algorithm for Binary Decompilation](https://www.zionbasque.com/files/publications/sailr_usenix24.pdf)
 Zion Leonahenahe Basque, Ati Priya Bajaj, **Wil Gibbs**, Jude O’Kain, Derron Miao, Tiffany Bao, Adam Doupé, Yan Shoshitaishvili, Ruoyu Wang
 _Proceedings of the USENIX Security Symposium, Philadelphia, USA August 2024._
