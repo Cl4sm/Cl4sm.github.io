@@ -36,7 +36,7 @@ listen_for_clients_preferred_style: true
 header_pages:
   - index.md
 
-footer: '<a href="https://twitter.com/cl4sm">twitter</a> | <a href="https://github.com/cl4sm">github</a> | <a href="./resume/resume.pdf">cv</a> | wil@wilgibbs.com'
+footer: '<a href="https://twitter.com/cl4sm">twitter</a> | <a href="https://github.com/cl4sm">github</a> | wil@wilgibbs.com'
 
 # Exclude from processing.
 # The following items will not be processed, by default.

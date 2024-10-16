@@ -41,6 +41,12 @@ _Proceedings of the USENIX Security Symposium, Anaheim, USA August 2023._
 }
 ``` -->
 
+# Media Appearences
+- [Hackers Race to win millions in contest to thwart cyberattacks with AI](https://www.washingtonpost.com/technology/2024/07/27/pentagon-cybersecurity-ai-hackathon-darpa-challenge/) (Washington Post)
+- [Cybersecurity team including students, faculty from ASU wins $2 million in international contest](https://ktar.com/story/5601955/cybersecurity-team-shellphish-finalist/) (KStar News)
+- [Jackpot! ASU hackers win $2M at Vegas AI competition](https://news.asu.edu/20240903-science-and-technology-jackpot-asu-hackers-win-2m-vegas-ai-competition) (ASU News)
+- [ASU students win $2M in cybersecurity competition](https://www.fox10phoenix.com/video/1529594) (Fox10 News)
+
 # Honors and Awards
 
 - AIxCC Finalist (Shellphish), Las Vegas, USA, 2024
