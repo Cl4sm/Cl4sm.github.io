@@ -22,6 +22,13 @@ Arvind S Raj, **Wil Gibbs**, Fangzhou Dong, Jayakrishna Menon Vadayath, Michael 
 _Proceedings of the ACM Computing Classification System, Utah, USA October 2024._
 [github](https://github.com/sefcom/flakjack)
 
+## [TyGr: Type Inference on Stripped Binaries using Graph Neural Networks](https://www.usenix.org/system/files/usenixsecurity24-zhu-chang.pdf)
+Chang Zhu, Ziyang Li, Anton Xue, Ati Priya Bajaj, **Wil Gibbs**, Yibo Liu
+Rajeev Alur, Tiffany Bao, Hanjun Dai, Adam Doupé, Mayur Naik, Yan Shoshitaishvili,
+Ruoyu Wang, Aravind Machiry
+_Proceedings of the USENIX Security Symposium, Philadelphia, USA August 2024._
+[github](https://github.com/sefcom/TYGR)
+
 ## [Ahoy SAILR! There is No Need to DREAM of C: A Compiler-Aware Structuring Algorithm for Binary Decompilation](https://www.zionbasque.com/files/publications/sailr_usenix24.pdf)
 Zion Leonahenahe Basque, Ati Priya Bajaj, **Wil Gibbs**, Jude O’Kain, Derron Miao, Tiffany Bao, Adam Doupé, Yan Shoshitaishvili, Ruoyu Wang
 _Proceedings of the USENIX Security Symposium, Philadelphia, USA August 2024._
@@ -31,15 +38,6 @@ _Proceedings of the USENIX Security Symposium, Philadelphia, USA August 2024._
 Hui Jun Tay, Kyle Zeng, Jayakrishna Menon Vadayath, Arvind S Raj, Audrey Dutcher, Tejesh Reddy, **Wil Gibbs**, Zion Leonahenahe Basque, Fangzhou Dong, Zack Smith, Adam Doupé, Tiffany Bao, Yan Shoshitaishvili, Ruoyu Wang
 _Proceedings of the USENIX Security Symposium, Anaheim, USA August 2023._
 [github](https://github.com/sefcom/Greenhouse) [pdf mirror](./papers/usenixsecurity23-tay.pdf)
-<!--```latex
-@inproceedings{tay2023greenhouse,
-  title={Greenhouse:$\{$Single-Service$\}$ Rehosting of $\{$Linux-Based$\}$ Firmware Binaries in $\{$User-Space$\}$ Emulation},
-  author={Tay, Hui Jun and Zeng, Kyle and Vadayath, Jayakrishna Menon and Raj, Arvind S and Dutcher, Audrey and Reddy, Tejesh and Gibbs, Wil and Basque, Zion Leonahenahe and Dong, Fangzhou and Smith, Zack and others},
-  booktitle={32nd USENIX Security Symposium (USENIX Security 23)},
-  pages={5791--5808},
-  year={2023}
-}
-``` -->
 
 # Media Appearences
 - [Hackers Race to win millions in contest to thwart cyberattacks with AI](https://www.washingtonpost.com/technology/2024/07/27/pentagon-cybersecurity-ai-hackathon-darpa-challenge/) (Washington Post)
