@@ -1,13 +1,18 @@
 {%- assign page_paths = site.header_pages | default: default_paths -%}
+
 <header>
   <div class="menu">
+    <div class="directory-header">~/research/sefcom/clasm</div>
     <ul>
       {%- for path in page_paths -%}
         {%- assign my_page = site.pages | where: "path", path | first -%}
         {%- if my_page.title -%}
-        <li><a href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a></li>
+        <li><span class="powerline-arrow">»</span> <a href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a></li>
         {%- endif -%}
       {%- endfor -%}
+      <li><span class="powerline-arrow">»</span> <a href="#publications">publications</a></li>
+      <li><span class="powerline-arrow">»</span> <a href="#media-appearences">media</a></li>
+      <li><span class="powerline-arrow">»</span> <a href="#honors-and-awards">awards</a></li>
     </ul>
   </div>
 </header>

@@ -12,12 +12,31 @@ h1 { font-size: 25px; }
 
 p, ul, ol { margin: 0px; color: var(--text-color); }
 
-img { width: 20%; height: 20%; filter: grayscale(100%); -webkit-filter: grayscale(100%); }
+img { width: 20%; height: 20%; }
 
 a { text-decoration: underline; color: var(--link-color); }
 
 a:hover { color: var(--background-color); background-color: var(--base-color); }
 
+/* Glitch Link Animation */
+.glitch-link { position: relative; text-decoration: none; color: inherit; }
+
+.glitch-link:hover::before, .glitch-link:hover::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+.glitch-link:hover::before { animation: glitch-anim-1 3s infinite; color: var(--glitch-color-1); clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); }
+
+.glitch-link:hover::after { animation: glitch-anim-2 3s infinite; color: var(--glitch-color-2); clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%); }
+
+@keyframes glitch-anim-1 { 0%, 20%, 100% { transform: translate(0) scale(1); opacity: 0; }
+  2%, 5% { transform: translate(-8px) scale(1.02); opacity: 1; }
+  7%, 10% { transform: translate(4px) scale(0.98); opacity: 1; }
+  12%, 15% { transform: translate(-2px) scale(1.01); opacity: 1; }
+  17%, 19% { transform: translate(6px) scale(0.99); opacity: 1; } }
+@keyframes glitch-anim-2 { 0%, 20%, 100% { transform: translate(0) scale(1); opacity: 0; }
+  2%, 5% { transform: translate(8px) scale(0.98); opacity: 1; }
+  7%, 10% { transform: translate(-4px) scale(1.02); opacity: 1; }
+  12%, 15% { transform: translate(2px) scale(0.99); opacity: 1; }
+  17%, 19% { transform: translate(-6px) scale(1.01); opacity: 1; } }
 @media only screen and (max-device-width: 500px) { * { font-size: 12px !important; } }
 /** Layout */
 .container { width: 90%; max-width: 800px; margin-right: auto; margin-left: auto; }
@@ -45,9 +64,9 @@ footer { margin-bottom: 20px; }
 :not(.menu) > ul > li:before { content: "-"; margin-right: 9px; }
 
 /** Header/Navigation */
-.menu { border-top: var(--border); border-bottom: var(--border); margin-bottom: 25px; }
+.menu { margin-bottom: 25px; }
 
-.menu ul { margin-top: 12px; margin-bottom: 12px; padding-left: 0px; list-style-type: none; text-align: right; }
+.menu ul { margin-top: 12px; margin-bottom: 12px; padding-left: 0px; list-style-type: none; text-align: left; }
 
 .menu ul li { display: inline; margin-left: 10px; }
 
@@ -254,5 +273,3 @@ pre { background-color: var(--background-color); border: none; padding: 0; margi
 
 /* Name.Variable.Instance */
 .highlight .il { color: var(--code-color-14); }
-
-/* Literal.Number.Integer.Long */
