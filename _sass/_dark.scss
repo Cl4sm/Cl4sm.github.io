@@ -4,7 +4,7 @@
 
 :root {
   // Main colors from your terminal theme
-  --background-color: #090a0e;
+  --background-color: #14161f;
   --text-color: #a9b1d6;
   --base-color: #7aa2f7;
   --link-color: #7aa2f7;
@@ -152,7 +152,6 @@ h1, h2, h3 {
   }
   
   &::before {
-    content: "»";
     color: var(--powerline-arrow-color);
     position: absolute;
     left: -1px;

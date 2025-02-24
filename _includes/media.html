@@ -1,0 +1,9 @@
+<h1>Media Appearances</h2>
+<section class="media-section" id="media">
+  {%- for media in site.data.media -%}
+    <div class="media">
+      <a class="media-title" href="{{ media.link }}">{{ media.title }}</a>
+      <div class="media-source">{{ media.source }}</div>
+    </div>
+  {%- endfor -%}
+</section>

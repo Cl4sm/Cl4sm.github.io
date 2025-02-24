@@ -1,0 +1,10 @@
+<h1>Honors and Awards</h2>
+<section class="awards-section" id="awards">
+  {%- for award in site.data.awards -%}
+    <div class="award">
+      <div class="award-title">{{ award.award }}</div>
+      <div class="award-location">{{ award.location }}</div>
+      <div class="award-year">{{ award.year }}</div>
+    </div>
+  {%- endfor -%}
+</section>
