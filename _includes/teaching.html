@@ -1,12 +1,17 @@
-<h1>Teaching</h1>
-<section class="teaching-section" id="teaching">
-  {%- for teaching in site.data.teaching -%}
-    <div class="teaching">
-      <div class="teaching-title">{{ teaching.title }}</div>
-      <div class="teaching-role">{{ teaching.role }}</div>
-      <div class="teaching-semester">{{ teaching.semester }}</div>
-      <div class="teaching-year">{{ teaching.year }}</div>
-    </div>
-  {%- endfor -%}
-</section>
+<h1 id="teaching">Teaching</h1>
+<div class="section-container">
+  <div class="terminal-header">
+    <span class="prompt">$</span> cat ./teaching_experience.txt
+  </div>
+  <section class="teaching-section">
+    {%- for teaching in site.data.teaching -%}
+      <div class="teaching">
+        <div class="teaching-title">{{ teaching.title }}</div>
+        <div class="teaching-role">{{ teaching.role }}</div>
+        <div class="teaching-semester">{{ teaching.semester }}</div>
+        <div class="teaching-year">{{ teaching.year }}</div>
+      </div>
+    {%- endfor -%}
+  </section>
+</div>
 

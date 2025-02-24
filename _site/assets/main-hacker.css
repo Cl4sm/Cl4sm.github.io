@@ -273,3 +273,60 @@ pre { background-color: var(--background-color); border: none; padding: 0; margi
 
 /* Name.Variable.Instance */
 .highlight .il { color: var(--code-color-14); }
+
+.media-section { margin: 2rem 0; }
+
+.media-section-header { display: flex; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
+.media-section-header::before { content: "./media"; color: var(--directory-color); margin-right: 1rem; font-weight: bold; }
+
+.media-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+
+.media-card { position: relative; padding: 0.75rem 1rem 0.75rem 2rem; border-left: 2px solid var(--border-color); transition: all 0.2s ease; cursor: pointer; }
+.media-card > a { position: absolute; inset: 0; z-index: 1; text-decoration: none; background: none; }
+.media-card > a:hover { background: none; color: inherit; }
+.media-card:hover { border-left-color: var(--directory-color); background: rgba(125, 207, 255, 0.05); }
+.media-card::before { content: ">"; color: var(--directory-color); position: absolute; left: 0.75rem; opacity: 0; transition: opacity 0.2s; z-index: 2; }
+.media-card:hover::before { opacity: 1; }
+
+.media-content { position: relative; z-index: 2; pointer-events: none; }
+.media-content h3 { margin: 0 0 0.5rem 0; font-size: 1.1rem; color: var(--heading-color); }
+
+.media-content h3 a { color: inherit; text-decoration: none; }
+.media-content h3 a:hover { color: var(--link-color); background: none; }
+
+.media-meta { font-size: 0.9rem; color: var(--text-color); opacity: 0.8; margin: 0; }
+
+.media-meta .outlet { color: var(--directory-color); font-weight: 500; }
+
+.media-meta .date::before { content: "~"; margin: 0 0.5rem; color: var(--powerline-arrow-color); }
+
+@media (max-width: 768px) { .media-grid { grid-template-columns: 1fr; } }
+.awards-container { margin: 2rem 0; font-family: "Source Code Pro", monospace; }
+
+.awards-header { margin-bottom: 1.5rem; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color); font-size: 1.5em; }
+.awards-header .prompt { color: var(--directory-color); margin-right: 0.5rem; }
+
+.awards-timeline { position: relative; padding-left: 20px; }
+.awards-timeline::before { content: ''; position: absolute; left: 95px; top: 0; bottom: 0; width: 2px; background: var(--border-color); }
+
+.award-entry { display: flex; align-items: flex-start; margin-bottom: 1.5rem; position: relative; }
+.award-entry:hover .award-year { color: var(--directory-color); }
+.award-entry:hover .award-year .bracket { opacity: 1; }
+.award-entry:hover .award-content { border-left-color: var(--directory-color); background: rgba(125, 207, 255, 0.05); }
+
+.award-year { width: 65px; padding-top: 0.5rem; padding-right: 25px; font-weight: bold; text-align: right; transition: color 0.2s ease; }
+.award-year .bracket { opacity: 0.5; transition: opacity 0.2s ease; }
+
+.award-content { flex: 1; margin-left: 2rem; padding: 0.75rem 1rem; border-left: 2px solid var(--border-color); transition: all 0.2s ease; }
+
+.award-title { font-weight: bold; margin-bottom: 0.25rem; }
+
+.award-location { font-size: 0.9em; opacity: 0.8; }
+
+@media (max-width: 768px) { .awards-timeline::before { left: 75px; }
+  .award-year { width: 55px; }
+  .awards-header { font-size: 1.25em; } }
+.terminal-header { margin-bottom: 1.5rem; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color); font-size: 1.5em; }
+.terminal-header .prompt { color: var(--directory-color); margin-right: 0.5rem; }
+
+@media (max-width: 768px) { .terminal-header { font-size: 1.25em; } }

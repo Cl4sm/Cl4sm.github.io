@@ -1,43 +1,48 @@
-<h1>Publications</h2>
-<section class="publications-section" id="publications">
-  {%- for publication in site.data.publications -%}
-    <div class="publication">
-      <div class="publication-title">
-        <a href="{{ publication.links.pdf }}">{{ publication.title }}</a>
+<h1 id="publications">Publications</h1>
+<div class="section-container">
+  <div class="terminal-header">
+    <span class="prompt">$</span> cat ./publications.txt
+  </div>
+  <section class="publications-section">
+    {%- for publication in site.data.publications -%}
+      <div class="publication">
+        <div class="publication-title">
+          <a href="{{ publication.links.pdf }}">{{ publication.title }}</a>
+        </div>
+        <div class="publication-authors">
+          <!-- <span class="author-highlight">Wil Gibbs</span>,  -->
+           {% assign line_length = 0 %}
+           {% for author in publication.authors %}
+             {% assign author_display = author | strip %}
+             {% if author == "Wil Gibbs" %}
+               {% assign author_display = '<span class="author-highlight">' | append: author | append: '</span>' | strip %}
+             {% endif %}
+             {% unless forloop.last %}
+               {% assign author_display = author_display | append: ',' %}
+             {% endunless %}
+             {% assign author_length = author.size | plus: 2 %}
+             {% assign new_length = line_length | plus: author_length %}
+             {% if new_length > 100 and forloop.index != 1 %}
+               <br>
+               {% assign line_length = author_length %}
+             {% else %}
+               {% assign line_length = new_length %}
+             {% endif %}
+             {{- author_display -}}
+             {% unless forloop.last %} {% endunless %}
+           {% endfor %}
+        </div>
+        <div class="publication-venue">
+          {{ publication.venue }} {{ publication.month }} {{ publication.year }}
+        </div>
+        <div class="publication-links">
+          <a href="{{ publication.links.pdf }}">[PDF]</a>
+          <a href="{{ publication.links.mirror }}">[PDF Mirror]</a>
+          <a href="{{ publication.links.github }}">[Code]</a>
+        </div>
       </div>
-      <div class="publication-authors">
-        <!-- <span class="author-highlight">Wil Gibbs</span>,  -->
-         {% assign line_length = 0 %}
-         {% for author in publication.authors %}
-           {% assign author_display = author | strip %}
-           {% if author == "Wil Gibbs" %}
-             {% assign author_display = '<span class="author-highlight">' | append: author | append: '</span>' | strip %}
-           {% endif %}
-           {% unless forloop.last %}
-             {% assign author_display = author_display | append: ',' %}
-           {% endunless %}
-           {% assign author_length = author.size | plus: 2 %}
-           {% assign new_length = line_length | plus: author_length %}
-           {% if new_length > 100 and forloop.index != 1 %}
-             <br>
-             {% assign line_length = author_length %}
-           {% else %}
-             {% assign line_length = new_length %}
-           {% endif %}
-           {{- author_display -}}
-           {% unless forloop.last %} {% endunless %}
-         {% endfor %}
-      </div>
-      <div class="publication-venue">
-        {{ publication.venue }} {{ publication.month }} {{ publication.year }}
-      </div>
-      <div class="publication-links">
-        <a href="{{ publication.links.pdf }}">[PDF]</a>
-        <a href="{{ publication.links.mirror }}">[PDF Mirror]</a>
-        <a href="{{ publication.links.github }}">[Code]</a>
-      </div>
-    </div>
-  {%- endfor -%}
+    {%- endfor -%}
 
-  <!-- More publications following the same pattern -->
-</section> 
+    <!-- More publications following the same pattern -->
+  </section>
+</div> 
