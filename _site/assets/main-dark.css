@@ -12,7 +12,7 @@ h1, h2, h3 { color: var(--heading-color); font-weight: 500; }
 .publication { margin-bottom: 2rem; padding: 1rem; background: var(--code-bg); border-radius: 4px; }
 
 @media (max-width: 768px) { body { padding: 1rem; } }
-.directory-header { color: var(--directory-color); font-weight: bold; padding-bottom: 0.5rem; margin-bottom: 0.5rem; border-bottom: 1px solid var(--border-color); text-align: left; }
+.directory-header { font-weight: bold; padding-bottom: 0.5rem; margin-bottom: 0.5rem; border-bottom: 1px solid var(--border-color); text-align: left; }
 
 .powerline-arrow { color: var(--powerline-arrow-color); font-weight: bold; margin-right: 0.5rem; }
 
@@ -343,7 +343,6 @@ pre { background-color: var(--background-color); border: none; padding: 0; margi
 .awards-container { margin: 2rem 0; font-family: "Source Code Pro", monospace; }
 
 .awards-header { margin-bottom: 1.5rem; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color); font-size: 1.5em; }
-.awards-header .prompt { color: var(--directory-color); margin-right: 0.5rem; }
 
 .awards-timeline { position: relative; padding-left: 20px; }
 .awards-timeline::before { content: ''; position: absolute; left: 95px; top: 0; bottom: 0; width: 2px; background: var(--border-color); }
@@ -366,6 +365,39 @@ pre { background-color: var(--background-color); border: none; padding: 0; margi
   .award-year { width: 55px; }
   .awards-header { font-size: 1.25em; } }
 .terminal-header { margin-bottom: 1.5rem; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color); font-size: 1.5em; }
-.terminal-header .prompt { color: var(--directory-color); margin-right: 0.5rem; }
 
 @media (max-width: 768px) { .terminal-header { font-size: 1.25em; } }
+.prompt { color: var(--directory-color); margin-right: 0.5rem; }
+
+.teaching-section { margin: 1rem 0; }
+
+.teaching-entry { position: relative; padding: 0.75rem 1rem 0.75rem 2rem; border-left: 2px solid var(--border-color); transition: all 0.2s ease; margin-bottom: 1rem; }
+.teaching-entry:hover { border-left-color: var(--directory-color); background: rgba(125, 207, 255, 0.05); }
+.teaching-entry::before { content: ">"; color: var(--directory-color); position: absolute; left: 0.75rem; opacity: 0; transition: opacity 0.2s; }
+.teaching-entry:hover::before { opacity: 1; }
+
+.teaching-title { font-weight: bold; margin-bottom: 0.25rem; }
+
+.teaching-meta { font-size: 0.9em; opacity: 0.8; }
+
+.teaching-role { color: var(--directory-color); }
+
+.teaching-date::before { content: "~"; margin: 0 0.5rem; color: var(--powerline-arrow-color); }
+
+.filename { color: #eb6ad3; }
+
+.about-section { margin: 1rem 0; }
+
+.about-content { position: relative; padding: 0.75rem 1rem; border-left: 2px solid var(--border-color); transition: all 0.2s ease; }
+.about-content:hover { border-left-color: var(--directory-color); background: rgba(125, 207, 255, 0.05); }
+
+.profile-image { float: right; margin: 0 0 1rem 1rem; }
+.profile-image img { width: 200px; height: auto; border-radius: 5px; }
+
+.about-text p { margin-bottom: 1rem; }
+.about-text p:last-child { margin-bottom: 0; }
+.about-text a { color: var(--link-color); text-decoration: none; }
+.about-text a:hover { text-decoration: underline; background: none; }
+
+@media (max-width: 768px) { .profile-image { float: none; margin: 0 0 1rem 0; text-align: center; }
+  .profile-image img { width: 150px; } }

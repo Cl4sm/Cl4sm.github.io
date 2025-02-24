@@ -2,7 +2,7 @@
 
 <header>
   <div class="menu">
-    <div class="directory-header">~/research/sefcom/clasm</div>
+    <div class="terminal-header"><span class="prompt">$</span> ls ~/research/sefcom/clasm</div>
     <ul>
       {%- for path in page_paths -%}
         {%- assign my_page = site.pages | where: "path", path | first -%}

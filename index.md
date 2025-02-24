@@ -3,10 +3,3 @@ title: home
 layout: home
 permalink: /
 ---
-![Wil Gibbs Profile Picture](./images/pfp_cropped.jpg)
-
-# About Me
-Hi! 
-I'm **Wil Gibbs** - a Ph.D. student at Airzona State University (ASU) interested in Systems Security.  I currently work at [SEFCOM](https://sefcom.asu.edu/) under [Dr. Ruoyu (Fish) Wang](https://rev.fish/) who is my primary advisor, but I also work closely with [Dr. Adam Doupé](https://adamdoupe.com/), [Dr. Yan SHoshitaishvili](https://yancomm.net/), and [Dr. Tiffany Bao](https://www.tiffanybao.com/).  I have a strong interest in anything binary analysis related with most of my research focus on static analysis. I am the Co-Lead of the Shellphish founded [AIxCC](https://aicyberchallenge.com/) team alongside Lukas Dresel where we won $2 Million from DARPA as finalists in the AIxCC competition with our Cyber Reasoning System (CRS) [ARTIPHISHELL](https://support.shellphish.net/).
-
-When I’m not doing Research, I am competing in ethical hacking competitions called CTFs! I am the captain of the internationally known CTF team [Shellphish](https://shellphish.net/) which routinely competes in DEFCON CTF and am a proud Captain emeritus. I started the ASU based CTF team *pwndevils* which has transitioned into the [ASU Hacking Club](http://asuhacking.club/) and pipelines talented hackers directly into Shellphish. I try my best at pwn and rev based challenges (with a sprinkle of web) under the handle *clasm* when competing.
