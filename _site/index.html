@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; img-src 'self'; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; media-src 'self'; object-src 'self'; child-src 'self'; form-action 'none'; base-uri 'self'" />
+<meta http-equiv="Content-Security-Policy" content=" style-src 'self' https://fonts.googleapis.com; img-src 'self'; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; media-src 'self'; object-src 'self'; child-src 'self'; form-action 'none'; base-uri 'self'" />
 <meta http-equiv="X-XSS-Protection"  content="1;mode=block" always>
 <meta http-equiv="Referrer-Policy" content="no-referrer, strict-origin-when-cross-origin"><head>
   <meta charset="utf-8">
@@ -27,7 +27,7 @@
 <body>
     <div class="container"><header>
   <div class="menu">
-    <div class="terminal-header"><span class="prompt">$</span> ls <span class="filename">~/research/sefcom/clasm</span></div>
+    <div class="terminal-header"><span class="prompt">$</span> cd <span class="filename">~/research/sefcom/clasm</span> && ls</div>
     <ul><li class="menu-item"><span class="powerline-arrow">»</span> <a href="/">home</a></li><li class="menu-item"><span class="powerline-arrow">»</span> <a href="#publications">publications</a></li>
       <li class="menu-item"><span class="powerline-arrow">»</span> <a href="#media">media</a></li>
       <li class="menu-item"><span class="powerline-arrow">»</span> <a href="#awards">awards</a></li>
@@ -46,9 +46,16 @@
         <img src="./images/pfp_cropped.jpg" alt="Wil Gibbs Profile Picture">
       </div>
       <div class="about-text">
-        <p>Hi!</p>
-        <p>I'm <strong>Wil Gibbs</strong> - a Ph.D. student at Arizona State University (ASU) interested in Systems Security. I currently work at <a href="https://sefcom.asu.edu/">SEFCOM</a> under <a href="https://rev.fish/">Dr. Ruoyu (Fish) Wang</a> who is my primary advisor, but I also work closely with <a href="https://adamdoupe.com/">Dr. Adam Doupé</a>, <a href="https://yancomm.net/">Dr. Yan Shoshitaishvili</a>, and <a href="https://www.tiffanybao.com/">Dr. Tiffany Bao</a>. I have a strong interest in anything binary analysis related with most of my research focus on static analysis. I am the Co-Lead of the Shellphish founded <a href="https://aicyberchallenge.com/">AIxCC</a> team alongside Lukas Dresel where we won $2 Million from DARPA as finalists in the AIxCC competition with our Cyber Reasoning System (CRS) <a href="https://support.shellphish.net/">ARTIPHISHELL</a>.</p>
-        <p>When I'm not doing Research, I am competing in ethical hacking competitions called CTFs! I am the captain of the internationally known CTF team <a href="https://shellphish.net/">Shellphish</a> which routinely competes in DEFCON CTF and am a proud Captain emeritus. I started the ASU based CTF team <em>pwndevils</em> which has transitioned into the <a href="http://asuhacking.club/">ASU Hacking Club</a> and pipelines talented hackers directly into Shellphish. I try my best at pwn and rev based challenges (with a sprinkle of web) under the handle <em>clasm</em> when competing.</p>
+        
+          <p><p>Hi!</p>
+</p>
+        
+          <p><p>I’m <strong>Wil Gibbs</strong> - a Ph.D. student at Arizona State University (ASU) interested in Systems Security. I currently work at <a href="https://sefcom.asu.edu/">SEFCOM</a> under <a href="https://rev.fish/">Dr. Ruoyu (Fish) Wang</a> who is my primary advisor, but I also work closely with <a href="https://adamdoupe.com/">Dr. Adam Doupé</a>, <a href="https://yancomm.net/">Dr. Yan Shoshitaishvili</a>, and <a href="https://www.tiffanybao.com/">Dr. Tiffany Bao</a>. I have a strong interest in anything binary analysis related with most of my research focus on static analysis. I am the Co-Lead of the Shellphish founded <a href="https://aicyberchallenge.com/">AIxCC</a> team alongside Lukas Dresel where we won $2 Million from DARPA as finalists in the AIxCC competition with our Cyber Reasoning System (CRS) <a href="https://support.shellphish.net/">ARTIPHISHELL</a>.</p>
+</p>
+        
+          <p><p>When I’m not doing Research, I am competing in ethical hacking competitions called CTFs! I am a member of the internationally known CTF team <a href="https://shellphish.net/">Shellphish</a> which routinely competes in DEFCON CTF and am a proud <strong>captain emeritus</strong> (2018-2024). I started the ASU based CTF team <em>pwndevils</em> which has transitioned into the <a href="http://asuhacking.club/">ASU Hacking Club</a> and pipelines talented hackers directly into Shellphish. I try my best at pwn and rev based challenges (with a sprinkle of web) under the handle <em>clasm</em> when competing.</p>
+</p>
+        
       </div>
     </div>
   </section>
@@ -206,9 +213,39 @@
           Proceedings of the USENIX Security Symposium, Philadelphia, USA August 2024
         </div>
         <div class="publication-links">
-          <a href="https://www.usenix.org/system/files/usenixsecurity24-gibbs.pdf">[PDF]</a>
-          <a href="./papers/mango_usenix24.pdf">[PDF Mirror]</a>
+          <a href="./papers/mango_usenix24.pdf">[PDF]</a>
           <a href="https://github.com/sefcom/operation-mango-public">[Code]</a>
+          <button class="cite-button" data-citation="@inproceedings{gibbs2024operation,
+title={Operation Mango: Scalable Discovery of $\{$Taint-Style$\}$ Vulnerabilities in Binary Firmware Services},
+author={Gibbs, Wil and Raj, Arvind S and Vadayath, Jayakrishna Menon and Tay, Hui Jun and Miller, Justin and Ajayan, Akshay and Basque, Zion Leonahenahe and Dutcher, Audrey and Dong, Fangzhou and Maso, Xavier and others},
+booktitle={33rd USENIX Security Symposium (USENIX Security 24)},
+pages={7123--7139},
+year={2024}
+}
+">[Cite]</button>
+        </div>
+        <div class="citation-popup">
+          <div class="citation-overlay"></div>
+          <div class="citation-content">
+            <div class="citation-header">
+              <div>
+                <span class="prompt">$</span> cat <span class="filename">./citation.bib</span>
+              </div>
+              <span class="close-x" title="Close">×</span>
+            </div>
+            <pre><code>@inproceedings{gibbs2024operation,
+title={Operation Mango: Scalable Discovery of $\{$Taint-Style$\}$ Vulnerabilities in Binary Firmware Services},
+author={Gibbs, Wil and Raj, Arvind S and Vadayath, Jayakrishna Menon and Tay, Hui Jun and Miller, Justin and Ajayan, Akshay and Basque, Zion Leonahenahe and Dutcher, Audrey and Dong, Fangzhou and Maso, Xavier and others},
+booktitle={33rd USENIX Security Symposium (USENIX Security 24)},
+pages={7123--7139},
+year={2024}
+}
+</code></pre>
+            <div class="citation-actions">
+              <button class="copy-button">[Copy]</button>
+              <button class="close-button">[Close]</button>
+            </div>
+          </div>
         </div>
       </div><div class="publication">
         <div class="publication-title">
@@ -360,9 +397,39 @@
           Proceedings of the ACM Computing Classification System, Utah, USA October 2024
         </div>
         <div class="publication-links">
-          <a href="https://sefcom.asu.edu/publications/flakjack-ccs24.pdf">[PDF]</a>
-          <a href="./papers/flakjack-ccs24.pdf">[PDF Mirror]</a>
+          <a href="./papers/flakjack-ccs24.pdf">[PDF]</a>
           <a href="https://github.com/sefcom/flakjack">[Code]</a>
+          <button class="cite-button" data-citation="@inproceedings{raj2024fuzz,
+title={Fuzz to the Future: Uncovering Occluded Future Vulnerabilities via Robust Fuzzing},
+author={Raj, Arvind S and Gibbs, Wil and Dong, Fangzhou and Vadayath, Jayakrishna Menon and Tompkins, Michael and Wirsz, Steven and Liu, Yibo and Hu, Zhenghao and Zhu, Chang and Menon, Gokulkrishna Praveen and others},
+booktitle={Proceedings of the 2024 on ACM SIGSAC Conference on Computer and Communications Security},
+pages={3719--3733},
+year={2024}
+}
+">[Cite]</button>
+        </div>
+        <div class="citation-popup">
+          <div class="citation-overlay"></div>
+          <div class="citation-content">
+            <div class="citation-header">
+              <div>
+                <span class="prompt">$</span> cat <span class="filename">./citation.bib</span>
+              </div>
+              <span class="close-x" title="Close">×</span>
+            </div>
+            <pre><code>@inproceedings{raj2024fuzz,
+title={Fuzz to the Future: Uncovering Occluded Future Vulnerabilities via Robust Fuzzing},
+author={Raj, Arvind S and Gibbs, Wil and Dong, Fangzhou and Vadayath, Jayakrishna Menon and Tompkins, Michael and Wirsz, Steven and Liu, Yibo and Hu, Zhenghao and Zhu, Chang and Menon, Gokulkrishna Praveen and others},
+booktitle={Proceedings of the 2024 on ACM SIGSAC Conference on Computer and Communications Security},
+pages={3719--3733},
+year={2024}
+}
+</code></pre>
+            <div class="citation-actions">
+              <button class="copy-button">[Copy]</button>
+              <button class="close-button">[Close]</button>
+            </div>
+          </div>
         </div>
       </div><div class="publication">
         <div class="publication-title">
@@ -504,9 +571,39 @@
           Proceedings of the USENIX Security Symposium, Philadelphia, USA August 2024
         </div>
         <div class="publication-links">
-          <a href="https://www.usenix.org/system/files/usenixsecurity24-zhu-chang.pdf">[PDF]</a>
-          <a href="./papers/usenixsecurity24-zhu-chang.pdf">[PDF Mirror]</a>
+          <a href="./papers/usenixsecurity24-zhu-chang.pdf">[PDF]</a>
           <a href="https://github.com/sefcom/TYGR">[Code]</a>
+          <button class="cite-button" data-citation="@inproceedings{raj2024fuzz,
+title={Fuzz to the Future: Uncovering Occluded Future Vulnerabilities via Robust Fuzzing},
+author={Raj, Arvind S and Gibbs, Wil and Dong, Fangzhou and Vadayath, Jayakrishna Menon and Tompkins, Michael and Wirsz, Steven and Liu, Yibo and Hu, Zhenghao and Zhu, Chang and Menon, Gokulkrishna Praveen and others},
+booktitle={Proceedings of the 2024 on ACM SIGSAC Conference on Computer and Communications Security},
+pages={3719--3733},
+year={2024}
+}
+">[Cite]</button>
+        </div>
+        <div class="citation-popup">
+          <div class="citation-overlay"></div>
+          <div class="citation-content">
+            <div class="citation-header">
+              <div>
+                <span class="prompt">$</span> cat <span class="filename">./citation.bib</span>
+              </div>
+              <span class="close-x" title="Close">×</span>
+            </div>
+            <pre><code>@inproceedings{raj2024fuzz,
+title={Fuzz to the Future: Uncovering Occluded Future Vulnerabilities via Robust Fuzzing},
+author={Raj, Arvind S and Gibbs, Wil and Dong, Fangzhou and Vadayath, Jayakrishna Menon and Tompkins, Michael and Wirsz, Steven and Liu, Yibo and Hu, Zhenghao and Zhu, Chang and Menon, Gokulkrishna Praveen and others},
+booktitle={Proceedings of the 2024 on ACM SIGSAC Conference on Computer and Communications Security},
+pages={3719--3733},
+year={2024}
+}
+</code></pre>
+            <div class="citation-actions">
+              <button class="copy-button">[Copy]</button>
+              <button class="close-button">[Close]</button>
+            </div>
+          </div>
         </div>
       </div><div class="publication">
         <div class="publication-title">
@@ -603,9 +700,39 @@
           Proceedings of the USENIX Security Symposium, Philadelphia, USA August 2024
         </div>
         <div class="publication-links">
-          <a href="https://www.usenix.org/system/files/usenixsecurity24-basque.pdf">[PDF]</a>
-          <a href="./papers/sailr_usenix24.pdf">[PDF Mirror]</a>
+          <a href="./papers/sailr_usenix24.pdf">[PDF]</a>
           <a href="https://github.com/mahaloz/angr-sailr">[Code]</a>
+          <button class="cite-button" data-citation="@inproceedings{raj2024fuzz,
+title={Fuzz to the Future: Uncovering Occluded Future Vulnerabilities via Robust Fuzzing},
+author={Raj, Arvind S and Gibbs, Wil and Dong, Fangzhou and Vadayath, Jayakrishna Menon and Tompkins, Michael and Wirsz, Steven and Liu, Yibo and Hu, Zhenghao and Zhu, Chang and Menon, Gokulkrishna Praveen and others},
+booktitle={Proceedings of the 2024 on ACM SIGSAC Conference on Computer and Communications Security},
+pages={3719--3733},
+year={2024}
+}
+">[Cite]</button>
+        </div>
+        <div class="citation-popup">
+          <div class="citation-overlay"></div>
+          <div class="citation-content">
+            <div class="citation-header">
+              <div>
+                <span class="prompt">$</span> cat <span class="filename">./citation.bib</span>
+              </div>
+              <span class="close-x" title="Close">×</span>
+            </div>
+            <pre><code>@inproceedings{raj2024fuzz,
+title={Fuzz to the Future: Uncovering Occluded Future Vulnerabilities via Robust Fuzzing},
+author={Raj, Arvind S and Gibbs, Wil and Dong, Fangzhou and Vadayath, Jayakrishna Menon and Tompkins, Michael and Wirsz, Steven and Liu, Yibo and Hu, Zhenghao and Zhu, Chang and Menon, Gokulkrishna Praveen and others},
+booktitle={Proceedings of the 2024 on ACM SIGSAC Conference on Computer and Communications Security},
+pages={3719--3733},
+year={2024}
+}
+</code></pre>
+            <div class="citation-actions">
+              <button class="copy-button">[Copy]</button>
+              <button class="close-button">[Close]</button>
+            </div>
+          </div>
         </div>
       </div><div class="publication">
         <div class="publication-title">
@@ -748,13 +875,101 @@
           Proceedings of the USENIX Security Symposium, Anaheim, USA August 2023
         </div>
         <div class="publication-links">
-          <a href="https://www.usenix.org/system/files/usenixsecurity23-tay.pdf">[PDF]</a>
-          <a href="./papers/usenixsecurity23-tay.pdf">[PDF Mirror]</a>
+          <a href="./papers/usenixsecurity23-tay.pdf">[PDF]</a>
           <a href="https://github.com/sefcom/Greenhouse">[Code]</a>
+          <button class="cite-button" data-citation="@inproceedings{tay2023greenhouse,
+title={Greenhouse:$\{$Single-Service$\}$ rehosting of $\{$Linux-Based$\}$ firmware binaries in $\{$User-Space$\}$ emulation},
+author={Tay, Hui Jun and Zeng, Kyle and Vadayath, Jayakrishna Menon and Raj, Arvind S and Dutcher, Audrey and Reddy, Tejesh and Gibbs, Wil and Basque, Zion Leonahenahe and Dong, Fangzhou and Smith, Zack and others},
+booktitle={32nd USENIX Security Symposium (USENIX Security 23)},
+pages={5791--5808},
+year={2023}
+}">[Cite]</button>
+        </div>
+        <div class="citation-popup">
+          <div class="citation-overlay"></div>
+          <div class="citation-content">
+            <div class="citation-header">
+              <div>
+                <span class="prompt">$</span> cat <span class="filename">./citation.bib</span>
+              </div>
+              <span class="close-x" title="Close">×</span>
+            </div>
+            <pre><code>@inproceedings{tay2023greenhouse,
+title={Greenhouse:$\{$Single-Service$\}$ rehosting of $\{$Linux-Based$\}$ firmware binaries in $\{$User-Space$\}$ emulation},
+author={Tay, Hui Jun and Zeng, Kyle and Vadayath, Jayakrishna Menon and Raj, Arvind S and Dutcher, Audrey and Reddy, Tejesh and Gibbs, Wil and Basque, Zion Leonahenahe and Dong, Fangzhou and Smith, Zack and others},
+booktitle={32nd USENIX Security Symposium (USENIX Security 23)},
+pages={5791--5808},
+year={2023}
+}</code></pre>
+            <div class="citation-actions">
+              <button class="copy-button">[Copy]</button>
+              <button class="close-button">[Close]</button>
+            </div>
+          </div>
         </div>
       </div><!-- More publications following the same pattern -->
   </section>
-</div> <div class="section-container" id="media">
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Handle cite buttons
+  document.querySelectorAll('.cite-button').forEach(button => {
+    button.addEventListener('click', function() {
+      const popup = this.closest('.publication').querySelector('.citation-popup');
+      popup.classList.add('active');
+    });
+  });
+
+  // Handle close buttons
+  document.querySelectorAll('.close-button').forEach(button => {
+    button.addEventListener('click', function() {
+      const popup = this.closest('.citation-popup');
+      popup.classList.remove('active');
+    });
+  });
+
+  // Handle clicking outside modal
+  document.querySelectorAll('.citation-overlay').forEach(overlay => {
+    overlay.addEventListener('click', function() {
+      const popup = this.closest('.citation-popup');
+      popup.classList.remove('active');
+    });
+  });
+
+  // Handle copy buttons
+  document.querySelectorAll('.copy-button').forEach(button => {
+    button.addEventListener('click', function() {
+      const citation = this.closest('.citation-content').querySelector('code').textContent;
+      navigator.clipboard.writeText(citation).then(() => {
+        const originalText = this.textContent;
+        this.textContent = 'Copied!';
+        setTimeout(() => {
+          this.textContent = originalText;
+        }, 2000);
+      });
+    });
+  });
+
+  // Handle close-x buttons
+  document.querySelectorAll('.close-x').forEach(button => {
+    button.addEventListener('click', function() {
+      const popup = this.closest('.citation-popup');
+      popup.classList.remove('active');
+    });
+  });
+
+  // Handle escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      const activePopup = document.querySelector('.citation-popup.active');
+      if (activePopup) {
+        activePopup.classList.remove('active');
+      }
+    }
+  });
+});
+</script> <div class="section-container" id="media">
   <div class="terminal-header">
     <span class="prompt">$</span> cat <span class="filename">./media_appearances.txt</span>
   </div>
