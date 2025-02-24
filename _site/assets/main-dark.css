@@ -21,7 +21,7 @@ h1, h2, h3 { color: var(--heading-color); font-weight: 500; }
 .menu ul li { display: inline-block; margin-right: 1.5rem; margin-bottom: 0.5rem; }
 .menu ul li:last-child { margin-right: 0; }
 
-.publications-section { background: var(--code-bg); border-radius: 8px; padding: 1.5rem; margin: 2rem 0; }
+.publications-section { background: rgba(36, 40, 59, 0.3); border-radius: 8px; padding: 1.5rem; margin: 2rem 0; border: 1px solid var(--border-color); }
 
 .publications-header { display: flex; align-items: center; margin-bottom: 1.5rem; }
 .publications-header::before { content: "[research]"; color: var(--powerline-arrow-color); margin-right: 1rem; font-weight: bold; }
