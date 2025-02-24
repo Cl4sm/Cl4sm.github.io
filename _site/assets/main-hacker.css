@@ -70,10 +70,12 @@ footer { margin-bottom: 20px; }
 
 .menu ul li { display: inline; margin-left: 10px; }
 
-.menu ul li a { text-decoration: none; color: var(--text-color); }
+.menu-item { font-size: 1.4em; }
+.menu-item .powerline-arrow { margin-right: 0.3rem; }
+.menu-item a { text-decoration: none; color: var(--text-color); }
+.menu-item a:hover { text-decoration: none; color: var(--background-color); background-color: var(--base-color); }
 
-.menu ul li a:hover { text-decoration: none; color: var(--background-color); background-color: var(--base-color); }
-
+@media (max-width: 768px) { .menu-item { font-size: 1em; } }
 /** Form */
 input, select, textarea { padding: 0; margin: 0; -webkit-appearance: none; -webkit-border-radius: 0; border: none; }
 
@@ -290,6 +292,7 @@ pre { background-color: var(--background-color); border: none; padding: 0; margi
 
 .media-content { position: relative; z-index: 2; pointer-events: none; }
 .media-content h3 { margin: 0 0 0.5rem 0; font-size: 1.1rem; color: var(--heading-color); }
+.media-content h3 emoji { margin-right: 0.5rem; }
 
 .media-content h3 a { color: inherit; text-decoration: none; }
 .media-content h3 a:hover { color: var(--link-color); background: none; }
@@ -325,7 +328,7 @@ pre { background-color: var(--background-color); border: none; padding: 0; margi
 @media (max-width: 768px) { .awards-timeline::before { left: 75px; }
   .award-year { width: 55px; }
   .awards-header { font-size: 1.25em; } }
-.terminal-header { margin-bottom: 1.5rem; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color); font-size: 1.5em; }
+.terminal-header { margin-bottom: 1rem; padding: 0.25rem 0; border-bottom: 1px solid var(--border-color); font-size: 1.5em; }
 
 @media (max-width: 768px) { .terminal-header { font-size: 1.25em; } }
 .prompt { color: var(--directory-color); margin-right: 0.5rem; }
@@ -345,7 +348,7 @@ pre { background-color: var(--background-color); border: none; padding: 0; margi
 
 .teaching-date::before { content: "~"; margin: 0 0.5rem; color: var(--powerline-arrow-color); }
 
-.filename { color: #eb6ad3; }
+.filename { color: #eb6ad3; font-size: 1.2em; }
 
 .about-section { margin: 1rem 0; }
 
@@ -361,4 +364,5 @@ pre { background-color: var(--background-color); border: none; padding: 0; margi
 .about-text a:hover { text-decoration: underline; background: none; }
 
 @media (max-width: 768px) { .profile-image { float: none; margin: 0 0 1rem 0; text-align: center; }
-  .profile-image img { width: 150px; } }
+  .profile-image img { width: 150px; }
+  .filename { font-size: 1.1em; } }

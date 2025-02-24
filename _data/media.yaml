@@ -8,13 +8,13 @@
   outlet: "KStar News"
   date: "2024-09-09"
   url: "https://ktar.com/story/5601955/cybersecurity-team-shellphish-finalist/"
-  icon: "radio"
+  icon: "newspaper"
 
 - title: "Jackpot! ASU hackers win $2M at Vegas AI competition"
   outlet: "ASU News"
   date: "2024-09-03"
   url: "https://news.asu.edu/20240903-science-and-technology-jackpot-asu-hackers-win-2m-vegas-ai-competition"
-  icon: "university"
+  icon: "newspaper"
 
 - title: "ASU students win $2M in cybersecurity competition"
   outlet: "Fox10 News"

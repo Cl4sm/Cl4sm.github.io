@@ -6,11 +6,9 @@
     <div class="media-grid">
       {% for item in site.data.media %}
       <div class="media-card">
-        <div class="media-icon">
-          <i class="fas fa-{{ item.icon }}"></i>
-        </div>
+        <a href="{{ item.url }}" target="_blank"></a>
         <div class="media-content">
-          <h3><a href="{{ item.url }}" target="_blank">"{{ item.title }}"</a></h3>
+          <h3>{% if item.icon == "newspaper" %}📰{% elsif item.icon == "tv" %}📺{% endif %} {{ item.title }}</h3>
           <p class="media-meta">
             <span class="outlet">{{ item.outlet }}</span>
             <span class="date">{{ item.date }}</span>

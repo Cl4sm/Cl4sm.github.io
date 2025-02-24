@@ -237,15 +237,29 @@ footer {
     margin-left: 10px;
 }
 
-.menu ul li a {
-    text-decoration: none;
-    color: var(--text-color);
+.menu-item {
+    font-size: 1.4em;  // Make menu items larger
+    
+    .powerline-arrow {
+        margin-right: 0.3rem;
+    }
+    
+    a {
+        text-decoration: none;
+        color: var(--text-color);
+        
+        &:hover {
+            text-decoration: none;
+            color: var(--background-color);
+            background-color: var(--base-color);
+        }
+    }
 }
 
-.menu ul li a:hover {
-    text-decoration: none;
-    color: var(--background-color);
-    background-color: var(--base-color);
+@media (max-width: 768px) {
+    .menu-item {
+        font-size: 1em;  // Slightly smaller on mobile
+    }
 }
 
 /**
@@ -708,12 +722,16 @@ pre {
 .media-content {
     position: relative;
     z-index: 2;
-    pointer-events: none;  // Allow clicks to pass through to the main link
+    pointer-events: none;
 
     h3 {
         margin: 0 0 0.5rem 0;
         font-size: 1.1rem;
         color: var(--heading-color);
+        
+        emoji {
+            margin-right: 0.5rem;
+        }
     }
 }
 
@@ -850,11 +868,10 @@ pre {
 }
 
 .terminal-header {
-  margin-bottom: 1.5rem;
-  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+  padding: 0.25rem 0;
   border-bottom: 1px solid var(--border-color);
   font-size: 1.5em;
-  
 }
 
 @media (max-width: 768px) {
@@ -921,7 +938,8 @@ margin-right: 0.5rem;
 }
 
 .filename {
-  color: #eb6ad3;  // Nord aurora purple
+  color: #eb6ad3;
+  font-size: 1.2em;
 }
 
 .about-section {
@@ -980,5 +998,9 @@ margin-right: 0.5rem;
     img {
       width: 150px;
     }
+  }
+  
+  .filename {
+    font-size: 1.1em;
   }
 }
