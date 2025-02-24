@@ -1,0 +1,19 @@
+<div class="section-container">
+  <div class="terminal-header">
+    <span class="prompt">$</span> cat <span class="filename">./teaching_experience.txt</span>
+  </div>
+  <section class="teaching-section">
+    {%- for teaching in site.data.teaching -%}
+      <div class="teaching-entry">
+        <div class="teaching-content">
+          <div class="teaching-title">{{ teaching.title }}</div>
+          <div class="teaching-meta">
+            <span class="teaching-role">{{ teaching.role }}</span>
+            <span class="teaching-date">{{ teaching.semester }} {{ teaching.year }}</span>
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </section>
+</div>
+

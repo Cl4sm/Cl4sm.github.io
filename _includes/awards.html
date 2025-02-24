@@ -1,0 +1,18 @@
+<div class="awards-container">
+  <div class="awards-header">
+    <span class="prompt">$</span> cat <span class="filename">./awards_and_honors.txt</span>
+  </div>
+  <div class="awards-timeline">
+    {%- for award in site.data.awards -%}
+      <div class="award-entry">
+        <div class="award-year">
+          <span class="bracket">[</span>{{ award.year }}<span class="bracket">]</span>
+        </div>
+        <div class="award-content">
+          <div class="award-title">{{ award.award }}</div>
+          <div class="award-location">@ {{ award.location }}</div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>

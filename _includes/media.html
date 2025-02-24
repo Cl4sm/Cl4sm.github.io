@@ -1,0 +1,21 @@
+<div class="section-container">
+  <div class="terminal-header">
+    <span class="prompt">$</span> cat <span class="filename">./media_appearances.txt</span>
+  </div>
+  <div class="media-section">
+    <div class="media-grid">
+      {% for item in site.data.media %}
+      <div class="media-card">
+        <a href="{{ item.url }}" target="_blank"></a>
+        <div class="media-content">
+          <h3>{% if item.icon == "newspaper" %}📰{% elsif item.icon == "tv" %}📺{% endif %} {{ item.title }}</h3>
+          <p class="media-meta">
+            <span class="outlet">{{ item.outlet }}</span>
+            <span class="date">{{ item.date }}</span>
+          </p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

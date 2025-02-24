@@ -31,7 +31,7 @@ github_username:  cl4sm
 remote_theme: b2a3e8/jekyll-theme-console
 
 style: dark
-listen_for_clients_preferred_style: true 
+listen_for_clients_preferred_style: false
 
 header_pages:
   - index.md
@@ -57,3 +57,8 @@ footer: '<a href="https://twitter.com/cl4sm">twitter</a> | <a href="https://gith
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+markdown: kramdown
+highlighter: rouge
+rouge:
+  style: monokai

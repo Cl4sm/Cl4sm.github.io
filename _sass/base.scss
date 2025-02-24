@@ -52,8 +52,8 @@ ol {
 img {
     width: 20%;
     height: 20%;
-    filter: grayscale(100%);
-    -webkit-filter: grayscale(100%);
+    // filter: grayscale(100%);
+    // -webkit-filter: grayscale(100%);
 
 }
 
@@ -65,6 +65,81 @@ a {
 a:hover {
     color: var(--background-color);
     background-color: var(--base-color);
+}
+
+/* Glitch Link Animation */
+.glitch-link {
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+}
+
+.glitch-link:hover::before,
+.glitch-link:hover::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch-link:hover::before {
+    animation: glitch-anim-1 3s infinite;
+    color: var(--glitch-color-1);
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+
+.glitch-link:hover::after {
+    animation: glitch-anim-2 3s infinite;
+    color: var(--glitch-color-2);
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch-anim-1 {
+    0%, 20%, 100% {
+        transform: translate(0) scale(1);
+        opacity: 0;
+    }
+    2%, 5% {
+        transform: translate(-8px) scale(1.02);
+        opacity: 1;
+    }
+    7%, 10% {
+        transform: translate(4px) scale(0.98);
+        opacity: 1;
+    }
+    12%, 15% {
+        transform: translate(-2px) scale(1.01);
+        opacity: 1;
+    }
+    17%, 19% {
+        transform: translate(6px) scale(0.99);
+        opacity: 1;
+    }
+}
+
+@keyframes glitch-anim-2 {
+    0%, 20%, 100% {
+        transform: translate(0) scale(1);
+        opacity: 0;
+    }
+    2%, 5% {
+        transform: translate(8px) scale(0.98);
+        opacity: 1;
+    }
+    7%, 10% {
+        transform: translate(-4px) scale(1.02);
+        opacity: 1;
+    }
+    12%, 15% {
+        transform: translate(2px) scale(0.99);
+        opacity: 1;
+    }
+    17%, 19% {
+        transform: translate(-6px) scale(1.01);
+        opacity: 1;
+    }
 }
 
 @media only screen and (max-device-width: 500px) {
@@ -146,8 +221,6 @@ footer {
  * Header/Navigation
  */
 .menu {
-    border-top: var(--border);
-    border-bottom: var(--border);
     margin-bottom: 25px;
 }
 
@@ -156,7 +229,7 @@ footer {
     margin-bottom: 12px;
     padding-left: 0px;
     list-style-type: none;
-    text-align: right;
+    text-align: left;
 }
 
 .menu ul li {
@@ -164,15 +237,29 @@ footer {
     margin-left: 10px;
 }
 
-.menu ul li a {
-    text-decoration: none;
-    color: var(--text-color);
+.menu-item {
+    font-size: 1.4em;  // Make menu items larger
+    
+    .powerline-arrow {
+        margin-right: 0.3rem;
+    }
+    
+    a {
+        text-decoration: none;
+        color: var(--text-color);
+        
+        &:hover {
+            text-decoration: none;
+            color: var(--background-color);
+            background-color: var(--base-color);
+        }
+    }
 }
 
-.menu ul li a:hover {
-    text-decoration: none;
-    color: var(--background-color);
-    background-color: var(--base-color);
+@media (max-width: 768px) {
+    .menu-item {
+        font-size: 1em;  // Slightly smaller on mobile
+    }
 }
 
 /**
@@ -564,6 +651,356 @@ pre {
 /* Name.Variable.Instance */
 .highlight .il {
     color: var(--code-color-14);
+} 
+
+.media-section {
+    margin: 2rem 0;
 }
 
-/* Literal.Number.Integer.Long */
+.media-section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    
+    &::before {
+        content: "./media";
+        color: var(--directory-color);
+        margin-right: 1rem;
+        font-weight: bold;
+    }
+}
+
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.media-card {
+    position: relative;
+    padding: 0.75rem 1rem 0.75rem 2rem;
+    border-left: 2px solid var(--border-color);
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    // Make the entire card a link
+    > a {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        text-decoration: none;
+        background: none;
+
+        &:hover {
+            background: none;
+            color: inherit;
+        }
+    }
+
+    &:hover {
+        border-left-color: var(--directory-color);
+        background: rgba(125, 207, 255, 0.05);
+    }
+
+    &::before {
+        content: ">";
+        color: var(--directory-color);
+        position: absolute;
+        left: 0.75rem;
+        opacity: 0;
+        transition: opacity 0.2s;
+        z-index: 2;
+    }
+
+    &:hover::before {
+        opacity: 1;
+    }
+}
+
+.media-content {
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+
+    h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.1rem;
+        color: var(--heading-color);
+        
+        emoji {
+            margin-right: 0.5rem;
+        }
+    }
+}
+
+// Remove the individual link styles since the whole card is now clickable
+.media-content h3 a {
+    color: inherit;
+    text-decoration: none;
+    
+    &:hover {
+        color: var(--link-color);
+        background: none;
+    }
+}
+
+.media-meta {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin: 0;
+}
+
+.media-meta .outlet {
+    color: var(--directory-color);
+    font-weight: 500;
+}
+
+.media-meta .date {
+    &::before {
+        content: "~";
+        margin: 0 0.5rem;
+        color: var(--powerline-arrow-color);
+    }
+}
+
+@media (max-width: 768px) {
+    .media-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.awards-container {
+  margin: 2rem 0;
+  font-family: $base-font-family;
+}
+
+.awards-header {
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 1.5em;
+  
+}
+
+.awards-timeline {
+  position: relative;
+  padding-left: 20px;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    left: 95px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border-color);
+  }
+}
+
+.award-entry {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  position: relative;
+  
+  &:hover {
+    .award-year {
+      color: var(--directory-color);
+      .bracket {
+        opacity: 1;
+      }
+    }
+    
+    .award-content {
+      border-left-color: var(--directory-color);
+      background: rgba(125, 207, 255, 0.05);
+    }
+  }
+}
+
+.award-year {
+  width: 65px;
+  padding-top: 0.5rem;
+  padding-right: 25px;
+  font-weight: bold;
+  text-align: right;
+  transition: color 0.2s ease;
+  
+  .bracket {
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+  }
+}
+
+.award-content {
+  flex: 1;
+  margin-left: 2rem;
+  padding: 0.75rem 1rem;
+  border-left: 2px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.award-title {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.award-location {
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .awards-timeline::before {
+    left: 75px;
+  }
+  
+  .award-year {
+    width: 55px;
+  }
+  
+  .awards-header {
+    font-size: 1.25em;
+  }
+}
+
+.terminal-header {
+  margin-bottom: 1rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 1.5em;
+}
+
+@media (max-width: 768px) {
+  .terminal-header {
+    font-size: 1.25em;
+  }
+}
+
+.prompt {
+color: var(--directory-color);
+margin-right: 0.5rem;
+}
+
+.teaching-section {
+  margin: 1rem 0;
+}
+
+.teaching-entry {
+  position: relative;
+  padding: 0.75rem 1rem 0.75rem 2rem;
+  border-left: 2px solid var(--border-color);
+  transition: all 0.2s ease;
+  margin-bottom: 1rem;
+
+  &:hover {
+    border-left-color: var(--directory-color);
+    background: rgba(125, 207, 255, 0.05);
+  }
+
+  &::before {
+    content: ">";
+    color: var(--directory-color);
+    position: absolute;
+    left: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+.teaching-title {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.teaching-meta {
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+
+.teaching-role {
+  color: var(--directory-color);
+}
+
+.teaching-date {
+  &::before {
+    content: "~";
+    margin: 0 0.5rem;
+    color: var(--powerline-arrow-color);
+  }
+}
+
+.filename {
+  color: #eb6ad3;
+  font-size: 1.2em;
+}
+
+.about-section {
+  margin: 1rem 0;
+}
+
+.about-content {
+  position: relative;
+  padding: 0.75rem 1rem;
+  border-left: 2px solid var(--border-color);
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-left-color: var(--directory-color);
+    background: rgba(125, 207, 255, 0.05);
+  }
+}
+
+.profile-image {
+  float: right;
+  margin: 0 0 1rem 1rem;
+  
+  img {
+    width: 200px;
+    height: auto;
+    border-radius: 5px;
+  }
+}
+
+.about-text {
+  p {
+    margin-bottom: 1rem;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  a {
+    color: var(--link-color);
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+      background: none;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-image {
+    float: none;
+    margin: 0 0 1rem 0;
+    text-align: center;
+    
+    img {
+      width: 150px;
+    }
+  }
+  
+  .filename {
+    font-size: 1.1em;
+  }
+}
