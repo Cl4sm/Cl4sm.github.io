@@ -684,6 +684,7 @@ pre {
     border-left: 2px solid var(--border-color);
     transition: all 0.2s ease;
     cursor: pointer;
+    min-height: 100px;
 
     // Make the entire card a link
     > a {
@@ -770,6 +771,15 @@ pre {
     .media-grid {
         grid-template-columns: 1fr;
     }
+    
+    .media-card {
+        min-height: auto;
+        padding: 0.5rem 1rem 0.5rem 2rem;
+    }
+    
+    .media-content h3 {
+        margin: 0 0 0.25rem 0;
+    }
 }
 
 .awards-container {
@@ -787,12 +797,10 @@ pre {
 
 .awards-timeline {
   position: relative;
-  padding-left: 20px;
-  
   &::before {
     content: '';
     position: absolute;
-    left: 95px;
+    left: 75px;
     top: 0;
     bottom: 0;
     width: 2px;
