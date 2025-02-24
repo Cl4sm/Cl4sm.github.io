@@ -377,10 +377,14 @@ pre { background-color: var(--background-color); border: none; padding: 0; margi
 @media (prefers-color-scheme: dark) { .directory-header { font-weight: bold; padding-bottom: 0.5rem; margin-bottom: 0.5rem; border-bottom: 1px solid var(--border-color); text-align: left; }
   .powerline-arrow { color: var(--powerline-arrow-color); font-weight: bold; margin-right: 0.5rem; }
   .menu { text-align: left; }
-  .menu ul { list-style: none; padding-left: 0; margin: 0; }
-  .menu ul li { display: inline-block; margin-right: 1.5rem; margin-bottom: 0.5rem; }
-  .menu ul li:last-child { margin-right: 0; }
-  .publications-section { background: rgba(36, 40, 59, 0.3); border-radius: 8px; padding: 1.5rem; margin: 2rem 0; border: 1px solid var(--border-color); }
+  .menu ul { list-style: none; padding-left: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+  .menu-item { display: flex; align-items: center; white-space: nowrap; }
+  .menu-item .powerline-arrow { color: var(--powerline-arrow-color); margin-right: 0.5rem; }
+  .menu-item a { color: var(--text-color); text-decoration: none; }
+  .menu-item a:hover { color: var(--background-color); background-color: var(--base-color); } }
+@media (prefers-color-scheme: dark) and (max-width: 768px) { .menu ul { gap: 0.75rem 1rem; }
+  .menu-item { font-size: 0.9em; } }
+@media (prefers-color-scheme: dark) { .publications-section { background: rgba(36, 40, 59, 0.3); border-radius: 8px; padding: 1.5rem; margin: 2rem 0; border: 1px solid var(--border-color); }
   .publications-header { display: flex; align-items: center; margin-bottom: 1.5rem; }
   .publications-header::before { content: "[research]"; color: var(--powerline-arrow-color); margin-right: 1rem; font-weight: bold; }
   .publication { position: relative; margin-bottom: 2rem; padding-left: 2rem; border-left: 2px solid var(--border-color); transition: border-left-color 0.2s; }
