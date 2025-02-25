@@ -54,6 +54,7 @@ body {
   max-width: 900px;
   margin: 0 auto;
   padding: 2rem;
+  position: relative;  // For proper positioning of pseudo-elements
 }
 
 a {
@@ -353,4 +354,63 @@ h1, h2, h3 {
       color: var(--powerline-arrow-color);
     }
   }
+}
+
+// Improve the binary overlay for smoother parallax
+.binary-overlay {
+  position: fixed;
+  top: -100px;
+  left: -100px;
+  right: -100px;
+  bottom: -100px;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+  
+  // Radial gradient for center transparency
+  mask-image: radial-gradient(
+    circle at center,
+    transparent 0%,
+    rgba(0,0,0,0.05) 30%, 
+    rgba(0,0,0,0.2) 60%,
+    rgba(0,0,0,0.4) 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    circle at center,
+    transparent 0%,
+    rgba(0,0,0,0.05) 30%,
+    rgba(0,0,0,0.2) 60%,
+    rgba(0,0,0,0.4) 100%
+  );
+  
+  // Optimizations for parallax performance
+  will-change: transform;
+  transform: translate3d(0, 0, 0); // Initial hardware acceleration
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.binary-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--heading-color);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  opacity: 0.05;
+  transition: color 0.5s ease-out, opacity 1.0s ease-out, text-shadow 0.5s ease-out;
+}
+
+.binary-cell.highlight {
+  opacity: 0.5;
+  text-shadow: 0 0 8px currentColor;
+}
+
+.binary-cell.highlight-bright {
+  opacity: 0.8;
+  text-shadow: 0 0 12px currentColor, 0 0 20px currentColor;
+}
+
+.binary-cell.alt-color {
+  color: var(--powerline-arrow-color);
 }
