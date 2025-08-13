@@ -1,8 +1,35 @@
-# All you need is MCP - (Mostly) Automatically exploiting and patching the DEF CON CTF Finals Challenge "ico"
+### DEF CON CTF
+Every year world-class teams play difficult CTFs such as Plaid CTF and HITCON CTF in an attempt to qualify for DEF CON CTF by getting first place.
+There are usually only 3-4 CTFs a year that have the right to be a pre-qualifying event.
+DEF CON CTF also has a semi-finals where anywhere between the top 8-12 teams will also qualify for the finals.
+DEF CON CTF is a halmark of DEF CON itself, having been around almost as long.
+It has attracted (and still does) top hackers that influence cyber-security itself such as GeoHot, Zardus, Lokihardt, etc..
+This is to say that DEF CON CTF **IS** the olympics of hacking, the gran-finale if you will.
+The challenges are hard, and the teams are stacked with top talent.
+
+### "ico"
+This challenge consists of a single x86-64 binary that spins up a server on port 4265.
+It's not quite statically linked, but uses only a few library functions despite being 1.4M in size and having almost 6k functions.
+```text
+[*] '/home/clasm/ctfs/dc-finals-25/ico/ico'
+    Arch:     amd64-64-little
+    RELRO:    Partial RELRO
+    Stack:    No canary found
+    NX:       NX enabled
+    PIE:      No PIE (0x400000)
+```
+
+Interestingly, there's no PIE or canary making overflows easier to exploit.
+Initially connecting to the server and sending manual random values gives no output.
+There program forks on every new connection.
+There is also a huge dispatch loop or VM which appears to take in bytes and execute different instructions depending on said bytes.
+Everything else, we'll need to figure out...
+
 
 ### The Why
+We had some excellent hackers from our team working on the challenge for about 4 hours prior to me starting such as salls, x3ero0, crowell, etc...
 After spending 2 years with LLMS for [AIxCC](https://aicyberchallenge.com) I've come to have a feeling for the boundary of what LLMs are and are not capable of.
-This is the **FIRST** time I've seen a challenge at the level of difficulty of DEF CON Finals CTF solved purely with LLMs and extremely little human interaction. I thought it was important for everyone else in the community to see it happen too!
+This is the **FIRST** time I've seen a challenge at the level of difficulty of DEF CON Finals CTF solved purely with LLMs (extremely little human interaction). I thought it was important for everyone else in the community to see it happen too!
 
 ### Background
 Shellphish had a busy DEF CON this year with both the final ctf and our [AIxCC](https://aicyberchallenge.com) submission.

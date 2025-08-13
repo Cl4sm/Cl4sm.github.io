@@ -222,6 +222,7 @@ footer {
  */
 .menu {
     margin-bottom: 25px;
+    position: relative;
 }
 
 .menu ul {
@@ -259,6 +260,115 @@ footer {
 @media (max-width: 768px) {
     .menu-item {
         font-size: 1em;  // Slightly smaller on mobile
+    }
+}
+
+// Right-aligned container for the blog button
+.menu-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 12px;
+}
+
+.blog-button {
+    display: inline-block;
+    padding: 0;
+    border: none;
+    background: none;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 1.6em;
+    letter-spacing: 0.5px;
+    color: var(--code-color-15); // voxel green tone
+    /* voxel, layered text-shadow for blocky depth */
+    text-shadow:
+        1px 1px 0 #6cad4c,
+        2px 2px 0 #5a9a3f,
+        3px 3px 0 #4b8c35,
+        4px 4px 0 #3d7d2b;
+    animation: voxel-bounce 3s ease-in-out infinite;
+    will-change: transform;
+}
+
+.blog-button:hover {
+    filter: brightness(1.1);
+    text-shadow:
+        1px 1px 0 #79c659,
+        2px 2px 0 #69b04d,
+        3px 3px 0 #5a9a3f,
+        4px 4px 0 #4b8c35,
+        5px 5px 0 rgba(61,125,43,0.8);
+}
+
+@keyframes voxel-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+@media (max-width: 768px) {
+    .blog-button {
+        font-size: 1.2em;
+    }
+}
+
+/* Blog index styles */
+.blog-index {
+    margin-top: 1rem;
+}
+
+.blog-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.blog-list-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.4rem 0.6rem 0.4rem 0.8rem;
+    border-left: 2px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.blog-list-item:hover {
+    border-left-color: var(--directory-color);
+    background: rgba(125, 207, 255, 0.05);
+}
+
+.blog-list-item a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.blog-list-item a:hover {
+    color: var(--background-color);
+    background: var(--base-color);
+}
+
+.blog-list-date {
+    opacity: 0.7;
+    margin-left: auto;
+    font-size: 0.95em;
+}
+
+.blog-post-header {
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.25rem;
+}
+
+.blog-post-meta {
+    opacity: 0.8;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .menu-right {
+        position: static;
+        margin-top: 0.5rem;
+        text-align: right;
     }
 }
 

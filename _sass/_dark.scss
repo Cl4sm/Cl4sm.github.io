@@ -78,6 +78,65 @@ h1, h2, h3 {
   border-radius: 4px;
 }
 
+// Distinct blockquotes (dark theme)
+blockquote {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem 0.75rem 1.25rem;
+  border-left: 3px solid var(--directory-color);
+  background: rgba(125, 207, 255, 0.08);
+  color: var(--text-color);
+}
+
+blockquote p {
+  margin: 0;
+}
+
+// Code block toolbar baseline (support common Rouge wrappers)
+figure.highlight,
+.highlighter-rouge > .highlight {
+  position: relative;
+  border: 1px solid var(--border-color);
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding-top: 2rem; /* room for toolbar */
+  overflow: hidden; /* prevent toolbar overlapping following content */
+}
+
+figure.highlight pre,
+.highlighter-rouge > .highlight pre {
+  max-height: 420px;
+  overflow-y: auto;
+  padding: 0.5rem 0.75rem;
+}
+
+.code-tools {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  display: flex;
+  gap: 0.4rem;
+  z-index: 2;
+}
+
+.code-tools button,
+.code-tools a {
+  font-family: inherit;
+  font-size: 0.9em;
+  color: var(--text-color);
+  background: rgba(122, 162, 247, 0.12);
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  padding: 0.1rem 0.45rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.code-tools button:hover,
+.code-tools a:hover {
+  color: var(--background-color);
+  background: var(--base-color);
+}
+
 @media (max-width: 768px) {
   body {
     padding: 1rem;

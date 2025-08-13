@@ -38,6 +38,12 @@ header_pages:
 
 footer: '<a href="https://twitter.com/cl4sm">twitter</a> | <a href="https://github.com/cl4sm">github</a> | wfgibbs@asu.edu'
 
+# Blog collection
+collections:
+  blog:
+    output: true
+    permalink: /blog/:name/
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
