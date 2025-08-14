@@ -56,7 +56,7 @@ This was my first use of `GPT-5`, and I'll say: it ran.
 And it ran and it ran and it ran.
 This model used the most amount of tool calls I'd ever seen, even after experimenting with `claude-4-sonnet`, `claude-4-opus`, `o3`, etc...
 Eventually the meeting ended, and I was able to look at the results.
-It ran for at least `12 minutes` entirely unassisted and gave us our first taste of hope.
+It ran for at least `12 minutes` entirely unassisted and gave us our first script.
 
 # The Script of Disappointment
 <!-- filename: disappointment.py -->
@@ -801,7 +801,7 @@ Parsed fields:
 
 Author (MD5 of flag): 1B5B55E424237B0FF70D2DAE6D79F226
 
-Plaintext flag via comment: flag{WINNER_WINNER_CHICKEN_DOBER}
+Plaintext flag via comment: flag{WINNER_WINNER_CHICKEN_DINNER}
 
 [*] Closed connection to 127.0.0.1 port 4265
 ```
@@ -814,7 +814,7 @@ But I read the code... and I read it again... and then I had three teammates tes
 `Fuck.`
 
 This actually worked.
-With almost zero human effort, I was able to ask, prod, and plead with an LLM to make an exploit for a DEF CON Finals–level challenge.
+With minimal human effort, I was able to ask, prod, and plead with an LLM to make an exploit for a DEF CON Finals–level challenge.
 
 Who better to explain the final exploit than the LLM who made it:
 <!-- LLM -->
@@ -949,7 +949,7 @@ if __name__ == "__main__":
 ```
 
 And that's it~!
-A single-byte overwrite, and it worked on the first try.
+A single-byte patch, and it worked on the first try.
 We deployed the patch in the morning and had no issue with the organizer's SLA checks.
 
 # The Great Vibe-ening
@@ -966,6 +966,12 @@ We were vibe-reversing now.
 However, the fun stops here.
 After this challenge, we were only able to get one of the Live CTF challenges automatically, but that was it.
 Nothing else of real substance came from this approach on other challenges.
+
+I'm annoyed that I solved this challenge like this.
+On one hand, it's really, really cool that technology has gotten to the point of being able to automate this.
+
+On the other, I like puzzles, I like learning, and I like challenges.
+I don't want to become a software engineer or prompt engineer, etc. I want to pwn challenges myself, not rot away as a glorified puppet for the LLM.
 
 But why did it work so well for this and not other challenges?
 
@@ -987,19 +993,15 @@ I don't think that you can take this approach and solve every CTF challenge out 
 
 `Is CTF dead?`  
 Surely not, we adapt, we overcome, we won't let the LLMs win.
+When [angr](https://angr.io/), the binary analysis frame with a symbolic executor, dropped in 2015, we saw less and less `crackme` type challenges until they disappeared almost completely.
+Crypto and other reversing challenges started using anti-symbolic execution techniques to counteract it.
+All this to say that we continue to hack even when the tools get better.
 
 `Is CTF changed?`  
 Yeah, I think so.
 This was not possible a year ago.
 The advent of LLMs is creeping into every aspect of our lives—even CTF.
 We'll just have to make challenges more resistant to LLMs, as we have with any new improvement to challenge solving in the past.
-
-I'm annoyed that I solved this challenge like this.
-On one hand, it's really, really cool that technology has gotten to the point of being able to automate this.
-
-On the other, I like puzzles, I like learning, and I like challenges.
-I don't want to become a software engineer or prompt engineer, etc. I want to pwn challenges myself, not rot away as a glorified puppet for the LLM.
-
 
 Thanks for reading,  
 `Clasm`
