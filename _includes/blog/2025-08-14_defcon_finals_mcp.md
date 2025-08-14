@@ -980,7 +980,7 @@ I think the path to exploit here could be significantly shorter if I had explici
 
 I'd distill my experience of creating the script into these steps:
 
-gather knowledge (from IDA) -> formulate hypothesis -> create exploit script -> analyze output -> apply new findings to IDA
+`gather knowledge (from IDA)` -> `formulate hypothesis` -> `create exploit script` -> `analyze script output` -> `apply new findings to IDA`  
 Doing this in a loop should give you some pretty decent output.
 
 I don't think that you can take this approach and solve every CTF challenge out there—maybe a few, but not the majority.
