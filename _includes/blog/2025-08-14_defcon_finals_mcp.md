@@ -994,7 +994,7 @@ I don't think that you can take this approach and solve every CTF challenge out 
 
 `Is CTF dead?`  
 Surely not, we adapt, we overcome, we won't let the LLMs win.
-When [angr](https://angr.io/), the binary analysis frame with a symbolic executor, dropped in 2015, we saw less and less `crackme` type challenges until they disappeared almost completely.
+When [angr](https://angr.io/), the binary analysis framework with a symbolic executor, dropped in 2015, we saw less and less simple `crackme` type challenges.
 Crypto and other reversing challenges started using anti-symbolic execution techniques to counteract it.
 All this to say that we continue to hack even when the tools get better.
 

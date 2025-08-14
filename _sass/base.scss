@@ -376,9 +376,12 @@ footer {
 
 @media (max-width: 768px) {
     .menu-right {
-        position: static;
-        margin-top: 0.5rem;
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-top: 10px;
         text-align: right;
+        z-index: 2;
     }
 }
 
