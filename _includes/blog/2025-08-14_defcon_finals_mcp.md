@@ -985,10 +985,10 @@ Doing this in a loop should give you some pretty decent output.
 
 I don't think that you can take this approach and solve every CTF challenge out there—maybe a few, but not the majority.
 
-`Is CTF dead?`
+`Is CTF dead?`  
 Surely not, we adapt, we overcome, we won't let the LLMs win.
 
-`Is CTF changed?`
+`Is CTF changed?`  
 Yeah, I think so.
 This was not possible a year ago.
 The advent of LLMs is creeping into every aspect of our lives—even CTF.
