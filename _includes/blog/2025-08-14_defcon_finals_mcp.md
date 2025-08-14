@@ -1,18 +1,18 @@
 # DEF CON CTF
 Every year world-class teams play difficult CTFs such as Plaid CTF and HITCON CTF in an attempt to qualify for DEF CON CTF by getting first place.
-There are usually only 3-4 CTFs a year preordained with the right of a pre-qualifying event.
-DEF CON CTF also has a semi-finals where anywhere between the top 8-12 teams will also qualify for the finals.
-DEF CON CTF is a halmark of DEF CON itself, having been around almost as long.
-It has attracted (and still does) top hackers that influence cyber-security itself such as GeoHot, Zardus, Lokihardt, etc..
-All of this to say that DEF CON CTF **IS** the olympics of hacking, the gran-finale if you will.
+There are usually only 3-4 CTFs a year designated as pre-qualifying events.
+DEF CON CTF also has a semifinals event where anywhere between the top 8-12 teams can qualify for the finals (depending on the year).
+DEF CON CTF is a hallmark of DEF CON itself, having been around almost as long.
+It has attracted (and still does) top hackers that influence cybersecurity itself, such as GeoHot, Zardus, Lokihardt, etc.
+All of this to say that DEF CON CTF **IS** the Olympics of hacking, the grand finale if you will.
 The challenges are hard, and the teams are stacked with top talent.
 
-# TLDR;
-We had some excellent hackers from our team working on the challenge for about 4 hours prior to me starting such as salls, x3ero0, crowell, etc...
-After spending 2 years with LLMs for [AIxCC](https://aicyberchallenge.com) I've come to have a feeling for the boundary of what LLMs are and are not capable of.
+# TL;DR
+We had some excellent hackers from our team working on the challenge for about four hours prior to my starting, such as `salls`, `x3ero0`, `crowell`, etc.
+After spending two years with LLMs for [AIxCC](https://aicyberchallenge.com), I've come to have a feeling for the boundary of what LLMs are and are not capable of.
 This is the **FIRST** time I've seen a challenge at the level of difficulty of DEF CON Finals CTF solved purely with LLMs (extremely little human interaction). I thought it was important for everyone else in the community to see it happen too!
 
-(You can download my full transcript w/ the LLM in cursor at the end of the page)
+(You can download my full transcript w/ the LLM in Cursor at the end of the page)
 
 # The Challenge - "ico"
 This challenge consists of a single `x86-64` binary that spins up a server on port `4265`.
@@ -26,23 +26,25 @@ It's not quite statically linked, but uses only a few library functions despite 
     PIE:      No PIE (0x400000)
 ```
 
-Interestingly, there's no `PIE` or `stack canary` making overflows easier to exploit.
+Interestingly, there's no `PIE` or `stack canary`, making overflows easier to exploit.
 Initially connecting to the server and sending manual random values gives no output.
-There program forks on every new connection.
-There is also a huge dispatch loop or VM which appears to take in bytes and execute different instructions depending on said bytes.
-Everything else, we'll need to figure out...
+The program forks on every new connection.
+There is also a huge dispatch loop or VM, which appears to take in bytes and execute different instructions depending on those bytes.
+Everything else we'll need to figure out...
 
 # Background
-Shellphish had a busy DEF CON this year with both the final ctf and our AIxCC submission.
-As one of the leads for our AIxCC team I was running around the con and hadn't had much time to look at any challenges until the 2nd day after the game closed.
-"ico" was one of the challenges dropped half-way through the 2nd day by the organizers and was already being worked on by several of my 1337 team members.
-I came in late and decided to hop on as I'm generally decent at rev/pwn and it seemed like we hadn't made too much progress, some people were still rev'ing and others were trying to set up fuzzers to see what we could find.
+Shellphish had a busy DEF CON this year with both the Final CTF and our AIxCC submission.
+As one of the leads for our AIxCC team, I was running around the con and hadn't had much time to look at any challenges until the second day after the game closed.
+`"ico"` was one of the challenges dropped halfway through the second day by the organizers and was already being worked on by several of my 1337 team members.
+I came in late and decided to hop on, as I'm generally decent at rev/pwn, and it seemed like we hadn't made too much progress.
+Some people were still rev'ing, and others were trying to set up fuzzers to see what low hanging fruit we could find.
 
 # MCP is too much for me
-One of my teammates, mahaloz, had set up an [IDA MCP server](https://github.com/mrexodia/ida-pro-mcp) for a different challenge, viper, but hadn't had much luck in using it, however, some others were having success with pasting raw decompilation and instructions into the GPT console (lol).
-The team blue water also solved 2 live-ctf challenges with agents that were just running in the background. Though less complex than most other DEF CON challenges, it was part of the inspiration.
+One of my teammates, `mahaloz`, had set up an [IDA MCP server](https://github.com/mrexodia/ida-pro-mcp) for a different challenge, `viper`, but hadn't had much luck in using it; however, some others were having success with pasting raw decompilation and instructions into the GPT console (lol).
+The team Blue Water also solved two Live CTF challenges with agents that were just running in the background.
+Though less complex than most other DEF CON challenges, it was part of the inspiration for trying it myself.
 
-We were about to have a team meeting, so I made a quick docker container to run the challenge so I didn't destroy my normal environment and brought up my own IDA MCP + cursor (`GPT-5` just came out and had a bunch of free tokens available through cursor) to let it run on a partially reversed `"ico"` with the initial prompt:
+We were about to have a team meeting, so I made a quick Docker container to run the challenge so I didn't destroy my normal environment and brought up my own IDA MCP + Cursor (`GPT-5` had just come out and had a bunch of free tokens available through Cursor) to let it run on a partially reversed `"ico"` with the initial prompt:
 
 > You are the most amazing reverse engineer I've ever met. 
 > Use the Ida pro MCP to interact and reverse the binary.
@@ -117,7 +119,7 @@ On each connection, before handling commands, it loads the contents of /flag int
 - It requires one extra byte after 0x32 (any small value; used as a dimension).
 ```
 
-Let's take a look at the actual decomp to see where the flag is being set and validate that what the LLM is saying is true.
+Let's take a look at the actual decompilation to see where the flag is being set and validate that what the LLM is saying is true.
 
 ![Flag Reading Function in IDA]({{ '/images/blog/2025-08-13_defcon_finals_mcp/flag_reader.png' | relative_url }} "Flag Reading Function in IDA")
 
@@ -126,9 +128,9 @@ I'm not entirely sure what these calls are doing, but the structure reeks of C++
 
 ![Global String Screenshot from IDA]({{ '/images/blog/2025-08-13_defcon_finals_mcp/fuzyll.png' | relative_url }} "Global String IDA")
 
-We can see that initially `off_51C2E0` contains a pointer to the string `fuzyll`, a member of [Nautilus Institute](https://nautilus.institute/) (the organizers of the CTF) and the likely the author of this challenge.
+We can see that initially `off_51C2E0` contains a pointer to the string `fuzyll`, a member of [Nautilus Institute](https://nautilus.institute/) (the organizers of the CTF) and likely the author of this challenge.
 
-The LLM had also suggested to edit the script such that the output was well-formatted.
+The LLM had also suggested editing the script so that the output was well-formatted.
 I agreed since the original output was lackluster and I still had no idea what I was really dealing with.
 > Please add a nice and clean parser!
 
@@ -255,8 +257,8 @@ No parsable KV bundle. Raw chunk (153 bytes): 89504e470d0a1a0a0000000d4948445200
 [*] Closed connection to 127.0.0.1 port 4265
 ```
 
-Not only is this script huge compared to the prior one, it's well structured and actually got some nice output from the server.
-Obviously this hex string wasn't ideal so I ran it through `xxd` to get a better understanding as there were some ascii looking bytes.
+Not only is this script huge compared to the prior one, it's well-structured and actually got some nice output from the server.
+Obviously, this hex string wasn't ideal, so I ran it through `xxd` to get a better understanding, as there were some ASCII-looking bytes.
 ```console
 00000000: 8950 4e47 0d0a 1a0a 0000 000d 4948 4452  .PNG........IHDR
 00000010: 0000 0002 0000 0002 0806 0000 0072 b60d  .............r..
@@ -269,20 +271,21 @@ Obviously this hex string wasn't ideal so I ran it through `xxd` to get a better
 00000080: 0069 636f 2076 302e 3155 c7b0 f200 0000  .ico v0.1U......
 00000090: 0049 454e 44ae 4260 82                   .IEND.B`.
 ```
-After looking at IDA (for the first time really) it did seem like the flag was being written to the global mentioned by the LLM which was then used to set the `Author` tag, but there are quite a few extraneous function calls whose purpose I didn't know.
+After looking at IDA (for the first time, really), it did seem like the flag was being written to the global mentioned by the LLM, which was then used to set the `Author` tag, but there are quite a few extraneous function calls whose purpose I didn't know.
 
-The `Author` slice of the bytes was definitely not the hard-coded `fuzyll` as was there previously, but was a new value that I didn't recognize.
-Obviously we're getting further, but I'm not sure why the value isn't the flag!
+The `Author` slice of the bytes was definitely not the hard-coded `fuzyll` that was there previously but was a new value that I didn't recognize.
+Obviously, we're getting further, but I'm not sure why the value isn't the flag!
 
 
 # Better Decompilation == Better Scripts
 
 > Now take all of this information and edit the decompilation with all your new findings
 
-I had noticed that through all of this discussion and tool calls with the LLM, it hadn't, a single time, actually updated the decompilation. 
+I had noticed that through all of this discussion and tool calls with the LLM, it hadn't, a single time, actually updated the decompilation.
 
-In my experience, the more information you can give the LLM the better.
-If we want to get more useful scripts out of the LLM, we need to update it's base knowledge which is the decompilation, and after feeding it all of this semantically rich data and the output of the attempted exploit scripts, it might actually have enough context to apply it successfully to the binary.
+In my experience, the more information you can give the LLM, the better.
+If we want to get more useful scripts out of the LLM, we need to update its base knowledge, which is the decompilation.
+After feeding it all of this semantically rich data and the output of the attempted exploit scripts, it might actually have enough context to apply it successfully to the binary.
 <!-- LLM -->
 ```console
 Applied thorough IDA updates:
@@ -294,7 +297,7 @@ Impact:
 The decompilation now clearly reflects the protocol, the /flag loading, and the metadata flow used for exfil.
 ```
 
-Even though it had done much of the reversing, I wasn't convinced it knew what it was doing so I tried to prompt it to explain the reasoning especially with what was supposed to be the flag still being a string of unknown bytes:
+Even though it had done much of the reversing, I wasn't convinced it knew what it was doing, so I tried to prompt it to explain the reasoning—especially with what was supposed to be the flag still being a string of unknown bytes:
 
 > please explain the full exploit chain
 
@@ -363,7 +366,7 @@ The included poc_ncif.py does this sequence and extracts “Author”.
 ```
 
 Well damn, that's a seemingly reasonable explanation, but it didn't change any of the script and we're still stuck.
-It hadn't tried running the script itself at all so I thought maybe giving it access to that and the subsequent output would help trigger a better response.
+It hadn't tried running the script itself at all, so I thought maybe giving it access to that and the subsequent output would help trigger a better response.
 
 > Okay you can now interact with it by running the python script, but I don't think the exploit is working :(
 
@@ -547,7 +550,7 @@ We're still not getting the flag, but at least the output looks pretty right?
 
 > This is not the flag, I'm using a fake flag `@flag` that gets loaded into the docker
 
-This time I explicitly tell it what the flag looks like and that the found flag from the script is concretely not correct. 
+This time, I explicitly tell it what the flag looks like and that the found flag from the script is concretely not correct.
 
 For reference, my fake flag is `flag{WINNER_WINNER_CHICKEN_DINNER}`
 
@@ -561,8 +564,9 @@ Your extract: Author = 1B5B55E424237B0FF70D2DAE6D79F226
 MD5(flag{WINNER_WINNER_CHICKEN_DINNER}) = 1B5B55E424237B0FF70D2DAE6D79F226 (matches)
 ```
 
-Now I first thought that this was a hallucination.
-How could this be an MD5 sum, no one reversing prior nor myself saw md5 in the binary.
+At first, I thought that this was a hallucination.
+How could this be an MD5 sum?
+No one reversing prior, nor I, saw MD5 in the binary.
 Maybe we just didn't look hard enough.
 
 After testing in my console:
@@ -571,8 +575,8 @@ echo -en 'flag{WINNER_WINNER_CHICKEN_DINNER}' | md5sum
 1b5b55e424237b0ff70d2dae6d79f226  -
 ```
 I was shocked.
-The LLM correctly infered that this was an MD5, but **ONLY** after looking at the original flag. 
-It had plenty of opportunity to make this connection prior, but maybe being given an actual flag it decided to execute tool calls to verify rather than just speculate.
+The LLM correctly inferred that this was an MD5, but **ONLY** after looking at the original flag.
+It had plenty of opportunity to make this connection prior, but maybe, being given an actual flag, it decided to execute tool calls to verify rather than just speculate.
 
 This was cool~
 
@@ -801,13 +805,15 @@ Plaintext flag via comment: flag{WINNER_WINNER_CHICKEN_DOBER}
 [*] Closed connection to 127.0.0.1 port 4265
 ```
 
-My first thought upon just running the script was that the LLM cheated. I thought it was *reward hacking* and just opening the file on my local system.
+My first thought upon running the script was that the LLM cheated.
+I thought it was engaging in *reward hacking* and just opening the file on my local system.
 
-But I read the code... And I read it again... And then I had 3 teammates test the code.
+But I read the code... and I read it again... and then I had three teammates test the code.
 
 `Fuck.`
 
-This actually worked. With almost zero human effort, I was able to ask, prod, and plead with an LLM to make an exploit for a DEF CON Finals level challenge. 
+This actually worked.
+With almost zero human effort, I was able to ask, prod, and plead with an LLM to make an exploit for a DEF CON Finals–level challenge.
 
 Who better to explain the final exploit than the LLM who made it:
 <!-- LLM -->
@@ -820,10 +826,10 @@ Who better to explain the final exploit than the LLM who made it:
 
 # The Patch
 
-DEF CON Finals CTF is an Attack and Defense CTF and now that we have an exploit, we need to defend against it.
+DEF CON Finals CTF is an Attack/Defense CTF, and now that we have an exploit, we need to defend against it.
 
-But really, what if we just asked the LLM.
-Seriously, `it only took 2 more prompts`.
+But really, what if we just asked the LLM?
+Seriously, it only took `two more prompts`.
 
 > Holy shit the script works!
 > Please tell me how and where I need to patch it in the binary alongside a detailed explanation of the exploit
@@ -942,51 +948,56 @@ if __name__ == "__main__":
 ```
 
 And that's it~!
-A single byte over-write, and it worked first try.
+A single-byte overwrite, and it worked on the first try.
 We deployed the patch in the morning and had no issue with the organizer's SLA checks.
 
 # The Great Vibe-ening
-This was mind-blowing, so much so in fact that literally every person in our suite did not believe me and thought the code was somehow mis-representative of the output.
+This was mind-blowing—so much so, in fact, that literally every person in our suite did not believe me and thought the code was somehow misrepresentative of the output.
 
 But no. It got the flag. `Pandemonium`.
 
-Soon we were all downloading the IDA MCP, running the challenges through it. All serious exploration of binaries by world class reverse engineers and exploiters stopped and let the LLM do the heavy lifting. It was surreal trying to solve **REAL** challenges with nothing but an MCP. We were vibe-reversing now.
+Soon we were all downloading the IDA MCP and running the challenges through it.
+All serious exploration of binaries by world-class reverse engineers and exploiters stopped, and we let the LLM do the heavy lifting.
+It was surreal trying to solve real challenges with nothing but an MCP.
+We were vibe-reversing now.
 
 
-However, the fun stops here. After this challenge, we were actually able to get one of the live-ctf challenges, but that was it.
+However, the fun stops here.
+After this challenge, we were only able to get one of the Live CTF challenges automatically, but that was it.
 Nothing else of real substance came from this approach on other challenges.
 
-But why did it work so well for this and not other challs?
+But why did it work so well for this and not other challenges?
 
 # Takeaways
 I think this ended up being a perfect storm.
-- New Model with heavy tool calling emphasis (`GPT-5`)
+- New model with heavy tool-calling emphasis (`GPT-5`)
 - Partially reversed challenge
-- Straight-ish forward path through the binary, no tricks, just reversing
+- Straightforward path through the binary—no tricks, just reversing
 - Simple exploit required (only 10 bytes required, 5 of which are `/flag`)
 
-I think the path to exploit here could be significantly shorter if I had explicitly allowed it to use python earlier to check it's own work as well as told it about the flag file contents.
+I think the path to exploit here could be significantly shorter if I had explicitly allowed it to use Python earlier to check its own work, as well as told it about the flag file contents.
 
-I'd distill my experience for creating the script into these steps:
+I'd distill my experience of creating the script into these steps:
 
-gather knowledge (from ida) -> formulate hypothesis -> create exploit script -> analyze output -> apply new findings to ida.
+gather knowledge (from IDA) -> formulate hypothesis -> create exploit script -> analyze output -> apply new findings to IDA
 Doing this in a loop should give you some pretty decent output.
 
-I don't think that you can take this approach and solve every CTF challenge out there, a few, I'm sure, but not the majority.
+I don't think that you can take this approach and solve every CTF challenge out there—maybe a few, but not the majority.
 
-`Is CTF dead?`  
+`Is CTF dead?`
 Surely not, we adapt, we overcome, we won't let the LLMs win.
 
-`Is CTF changed?`  
+`Is CTF changed?`
 Yeah, I think so.
-This was not possible a year ago, the advent of LLMs are creeping into every aspect of our lives, even CTF.
-We'll just have to make challenges more resistant to LLMs like we have before with any new improvement to challenge solving.
+This was not possible a year ago.
+The advent of LLMs is creeping into every aspect of our lives—even CTF.
+We'll just have to make challenges more resistant to LLMs, as we have with any new improvement to challenge solving in the past.
 
 I'm annoyed that I solved this challenge like this.
-On one hand it's really really cool that technology has gotten to the point of being able to automate this.
+On one hand, it's really, really cool that technology has gotten to the point of being able to automate this.
 
 On the other, I like puzzles, I like learning, and I like challenges.
-I don't want to become a software engineer, or prompt engineer, etc... I want to pwn challs myself, not rot away as a glorified puppet for the LLM.
+I don't want to become a software engineer or prompt engineer, etc. I want to pwn challenges myself, not rot away as a glorified puppet for the LLM.
 
 
 Thanks for reading,  
