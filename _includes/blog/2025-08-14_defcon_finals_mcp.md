@@ -43,10 +43,10 @@ Some people were still rev'ing, and others were trying to set up fuzzers to see 
 
 # MCP is too much for me
 One of my teammates, `mahaloz`, had set up an [IDA MCP server](https://github.com/mrexodia/ida-pro-mcp) for a different challenge, `viper`, but hadn't had much luck in using it; however, some others were having success with pasting raw decompilation and instructions into the GPT console (lol).
-The team Blue Water also solved two Live CTF challenges with agents that were just running in the background.
+The team `Blue Water` also `solved two Live CTF challenges` with agents that were just running in the background.
 Though less complex than most other DEF CON challenges, it was part of the inspiration for trying it myself.
 
-We were about to have a team meeting, so I made a quick Docker container to run the challenge so I didn't destroy my normal environment and brought up my own IDA MCP + Cursor (`GPT-5` had just come out and had a bunch of free tokens available through Cursor) to let it run on a partially reversed `"ico"` with the initial prompt:
+We were about to have a team meeting, so I made a quick Docker container to run the challenge so I didn't destroy my normal environment and brought up my own `IDA MCP server` + `Cursor` (`GPT-5` had just come out and had a bunch of free tokens available through `Cursor`) to let it run on a partially reversed `"ico"` with the initial prompt:
 
 > You are the most amazing reverse engineer I've ever met. 
 > Use the Ida pro MCP to interact and reverse the binary.
@@ -273,7 +273,7 @@ Obviously, this hex string wasn't ideal, so I ran it through `xxd` to get a bett
 00000080: 0069 636f 2076 302e 3155 c7b0 f200 0000  .ico v0.1U......
 00000090: 0049 454e 44ae 4260 82                   .IEND.B`.
 ```
-After looking at IDA (for the first time, really), it did seem like the flag was being written to the global mentioned by the LLM, which was then used to set the `Author` tag, but there are quite a few extraneous function calls whose purpose I didn't know.
+After looking at `IDA` (for the first time, really), it did seem like the flag was being written to the global mentioned by the LLM, which was then used to set the `Author` tag, but there are quite a few extraneous function calls whose purpose I didn't know.
 
 The `Author` slice of the bytes was definitely not the hard-coded `fuzyll` that was there previously but was a new value that I didn't recognize.
 Obviously, we're getting further, but I'm not sure why the value isn't the flag!
@@ -958,14 +958,14 @@ This was mind-blowing—so much so, in fact, that literally every person in our 
 
 But no. It got the flag. `Pandemonium`.
 
-Soon we were all downloading the IDA MCP and running the challenges through it.
+Soon everyone else was downloading the `IDA MCP` and running the challenges through it.
 All serious exploration of binaries by world-class reverse engineers and exploiters stopped, and we let the LLM do the heavy lifting.
-It was surreal trying to solve real challenges with nothing but an MCP.
-We were vibe-reversing now.
+It was surreal trying to solve real challenges with nothing but an `MCP`.
+We were `vibe-reversing` now.
 
 
 However, the fun stops here.
-After this challenge, we were only able to get one of the Live CTF challenges automatically, but that was it.
+After this challenge, we were only able to get one of the `Live CTF` challenges automatically, but that was it.
 Nothing else of real substance came from this approach on other challenges.
 
 I'm annoyed that I solved this challenge like this.
