@@ -300,6 +300,8 @@ footer {
 }
 
 .blog-button:hover {
+    background: none;
+    color: var(--code-color-15);
     filter: brightness(1.1);
     text-shadow:
         1px 1px 0 #79c659,

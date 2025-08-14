@@ -1,74 +1,13 @@
 // Enhance code blocks: add Copy and Download, set vertical scrolling
 (function () {
-  function hasPrevCommentMarker(node, regex) {
-    let container = node;
-    // If this is the inner .highlight, prefer scanning from the outer .highlighter-rouge wrapper
-    const outer = node && node.closest && node.closest('.highlighter-rouge');
-    if (outer) container = outer;
-
-    // Case A: the comment was inserted as the first child inside the container (common with Kramdown/Rouge)
-    try {
-      let first = container && container.firstChild;
-      while (first && first.nodeType === Node.TEXT_NODE && String(first.textContent || '').trim() === '') {
-        first = first.nextSibling;
-      }
-      if (first && first.nodeType === Node.COMMENT_NODE) {
-        const val = String(first.nodeValue || '');
-        if (regex.test(val)) return true;
-      }
-    } catch (_) {}
-
-    // Find the nearest previous sibling that is not whitespace-only text
-    let prev = container && container.previousSibling;
-    while (prev) {
-      if (prev.nodeType === Node.TEXT_NODE && String(prev.textContent || '').trim() === '') {
-        prev = prev.previousSibling;
-        continue;
-      }
-      break;
-    }
-    // Case B: immediate previous sibling is a comment
-    if (prev && prev.nodeType === Node.COMMENT_NODE) {
-      const val = String(prev.nodeValue || '');
-      return regex.test(val);
-    }
-    // Case C: immediate previous element sibling ends with the comment
-    if (prev && prev.nodeType === Node.ELEMENT_NODE) {
-      let last = prev.lastChild;
-      while (last && last.nodeType === Node.TEXT_NODE && String(last.textContent || '').trim() === '') {
-        last = last.previousSibling;
-      }
-      if (last && last.nodeType === Node.COMMENT_NODE) {
-        const val = String(last.nodeValue || '');
-        return regex.test(val);
-      }
-    }
-    return false;
-  }
-
-  function hasPrevNegativeMarker(node) {
-    return hasPrevCommentMarker(node, /\bnot-llm\b/i) ||
-           (node && (node.getAttribute && node.getAttribute('data-llm') === 'false'));
-  }
   function getLanguage(fig) {
-    const known = ['console', 'stdout', 'hexdump', 'python', 'bash', 'shell', 'sh', 'shell-session', 'text', 'plaintext'];
-
     function extractFrom(el) {
       if (!el) return '';
       const classes = Array.from(el.classList || []);
-
-      // Prefer exact known languages from language-* tokens
-      const languageTokens = classes.filter((c) => c.startsWith('language-')).map((c) => c.replace('language-', ''));
-      const preferred = languageTokens.find((tok) => known.includes(tok));
-      if (preferred) return preferred;
-
-      // Otherwise, if any language-* present, but unknown (e.g., 'llm'), ignore it and try direct known class
-      if (languageTokens.length > 0) {
-        const directKnown = classes.find((c) => known.includes(c));
-        if (directKnown) return directKnown;
-      }
-
-      // Fallback: Some themes put raw language name on the element (e.g., 'console')
+      const langClass = classes.find((c) => c.startsWith('language-'));
+      if (langClass) return langClass.replace('language-', '');
+      // Some themes put raw language name on the element (e.g., 'console')
+      const known = ['console', 'python', 'bash', 'shell', 'sh', 'shell-session'];
       const direct = classes.find((c) => known.includes(c));
       return direct || '';
     }
@@ -231,30 +170,6 @@
       .forEach((fig) => {
         // Only add to Python blocks; skip console/stdout/hexdump/plaintext entirely
         const lang = getLanguage(fig);
-        const container = fig.closest('.highlighter-rouge') || fig;
-        const code = fig.querySelector('code');
-        const preEl = fig.querySelector('pre');
-        const classes = new Set([
-          ...Array.from(fig.classList || []),
-          ...Array.from((code && code.classList) || []),
-          ...Array.from((preEl && preEl.classList) || []),
-          ...Array.from((container && container.classList) || [])
-        ]);
-        const hasLLMClass = classes.has('llm') || classes.has('is-llm') || classes.has('role-llm');
-        const isLLMByComment = hasPrevCommentMarker(container, /\bllm\b/i);
-        const isLLMByAttr = container.getAttribute('data-llm') === 'true';
-        const isOverriddenNot = hasPrevNegativeMarker(container);
-
-        if (!isOverriddenNot && (hasLLMClass || isLLMByComment || isLLMByAttr)) {
-          fig.classList.add('no-tools');
-          fig.classList.add('is-output');
-          fig.classList.add('is-llm');
-          if (!fig.getAttribute('data-output-label')) {
-            fig.setAttribute('data-output-label', 'LLM');
-          }
-          return;
-        }
-
         if (['console', 'stdout', 'hexdump', 'text', 'plaintext'].includes(lang)) {
           // mark as no-tools so CSS can reduce top padding and style as output
           fig.classList.add('no-tools');
@@ -269,20 +184,13 @@
           };
           const label = labelMap[lang] || 'OUTPUT';
           fig.setAttribute('data-output-label', label);
-          // Detect LLM responses alongside console and add variant
-          try {
-            if (!isOverriddenNot && (hasLLMClass || isLLMByComment || isLLMByAttr)) {
-              fig.classList.add('is-llm');
-              fig.setAttribute('data-output-label', 'LLM');
-            }
-          } catch (_) {}
           return;
         }
         if (lang && lang !== 'python') return;
         if (fig.classList.contains('no-tools')) return;
         if (fig.closest('.no-tools')) return;
-        const innerCode = fig.querySelector('code');
-        if (innerCode && innerCode.classList.contains('no-tools')) return;
+        const code = fig.querySelector('code');
+        if (code && code.classList.contains('no-tools')) return;
         addToolsToHighlight(fig);
       });
   }

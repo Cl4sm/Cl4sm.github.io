@@ -272,13 +272,11 @@ Obviously this hex string wasn't ideal so I ran it through `xxd` to get a better
 ```
 After looking at IDA (for the first time really) it did seem like the flag was being written to the global mentioned by the LLM which was then used to set the `Author` tag, but there are quite a few extraneous function calls whose purpose I didn't know.
 
-**INSERT IDA SCREENSHOTS HERE**
-
 The `Author` slice of the bytes was definitely not the hard-coded `fuzyll` as was there previously, but was a new value that I didn't recognize.
 Obviously we're getting further, but I'm not sure why the value isn't the flag!
 
 
-# Better Decompilation Better Scripts
+# Better Decompilation == Better Scripts
 
 > Now take all of this information and edit the decompilation with all your new findings
 
@@ -588,7 +586,7 @@ Then a second message after the update to try and massage the exploit script int
 
 > Now that we know this, we need to figure out how to actually get the flag because the md5sum doesn't help us, we need the flag!!!!
 
-# The Exploit 
+# The Script Of Exploitation
 <!-- filename: exploit.py -->
 ```python
 from __future__ import annotations
@@ -950,7 +948,7 @@ We deployed the patch in the morning and had no issue with the organizer's SLA c
 # The Great Vibe-ening
 This was mind-blowing, so much so in fact that literally every person in our suite did not believe me and thought the code was somehow mis-representative of the output.
 
-But no. It got the flag. Pandemonium.
+But no. It got the flag. `Pandemonium`.
 
 Soon we were all downloading the IDA MCP, running the challenges through it. All serious exploration of binaries by world class reverse engineers and exploiters stopped and let the LLM do the heavy lifting. It was surreal trying to solve **REAL** challenges with nothing but an MCP. We were vibe-reversing now.
 
@@ -976,13 +974,13 @@ Doing this in a loop should give you some pretty decent output.
 
 I don't think that you can take this approach and solve every CTF challenge out there, a few, I'm sure, but not the majority.
 
-Is CTF dead?
+`Is CTF dead?`
 Surely not, we adapt, we overcome, we won't let the LLMs win.
 
-Is CTF changed? 
+`Is CTF changed?`
 Yeah, I think so.
 This was not possible a year ago, the advent of LLMs are creeping into every aspect of our lives, even CTF.
-We'll just have to adapt to make challenges more resistant to LLMs.
+We'll just have to make challenges more resistant to LLMs like we have before with any new improvement to challenge solving.
 
 I'm annoyed that I solved this challenge like this.
 On one hand it's really really cool that technology has gotten to the point of being able to automate this.
