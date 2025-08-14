@@ -989,7 +989,7 @@ On the other, I like puzzles, I like learning, and I like challenges.
 I don't want to become a software engineer, or prompt engineer, etc... I want to pwn challs myself, not rot away as a glorified puppet for the LLM.
 
 
-Thanks for reading,
+Thanks for reading,  
 `Clasm`
 
 
