@@ -7,7 +7,14 @@ It has attracted (and still does) top hackers that influence cyber-security itse
 All of this to say that DEF CON CTF **IS** the olympics of hacking, the gran-finale if you will.
 The challenges are hard, and the teams are stacked with top talent.
 
-# "ico"
+# TLDR;
+We had some excellent hackers from our team working on the challenge for about 4 hours prior to me starting such as salls, x3ero0, crowell, etc...
+After spending 2 years with LLMs for [AIxCC](https://aicyberchallenge.com) I've come to have a feeling for the boundary of what LLMs are and are not capable of.
+This is the **FIRST** time I've seen a challenge at the level of difficulty of DEF CON Finals CTF solved purely with LLMs (extremely little human interaction). I thought it was important for everyone else in the community to see it happen too!
+
+(You can download my full transcript w/ the LLM in cursor at the end of the page)
+
+# The Challenge - "ico"
 This challenge consists of a single `x86-64` binary that spins up a server on port `4265`.
 It's not quite statically linked, but uses only a few library functions despite being `1.4M` in size and having almost `6k` functions.
 ```console
@@ -24,14 +31,6 @@ Initially connecting to the server and sending manual random values gives no out
 There program forks on every new connection.
 There is also a huge dispatch loop or VM which appears to take in bytes and execute different instructions depending on said bytes.
 Everything else, we'll need to figure out...
-
-
-# The Why
-We had some excellent hackers from our team working on the challenge for about 4 hours prior to me starting such as salls, x3ero0, crowell, etc...
-After spending 2 years with LLMS for [AIxCC](https://aicyberchallenge.com) I've come to have a feeling for the boundary of what LLMs are and are not capable of.
-This is the **FIRST** time I've seen a challenge at the level of difficulty of DEF CON Finals CTF solved purely with LLMs (extremely little human interaction). I thought it was important for everyone else in the community to see it happen too!
-
-(You can download my full transcript w/ the LLM in cursor at the end of the page)
 
 # Background
 Shellphish had a busy DEF CON this year with both the final ctf and our AIxCC submission.
@@ -106,7 +105,7 @@ I immediately ran the script and was disappointed to find out that it ran but di
 But that's to be expected from AI slop right?
 
 It did, however, give some pretty interesting findings alongside this defunct script:
-<!-- llm -->
+<!-- LLM -->
 ```console
 On each connection, before handling commands, it loads the contents of /flag into a global string buffer off_51C2E0:
   idk_what_this_is_man → sets path to "/flag", reads it, stores pointer into off_51C2E0.
@@ -280,11 +279,11 @@ Obviously we're getting further, but I'm not sure why the value isn't the flag!
 
 > Now take all of this information and edit the decompilation with all your new findings
 
-I had noticed that through all of this discussion and tool calls with the llm, it hadn't, a single time, actually updated the decompilation. 
+I had noticed that through all of this discussion and tool calls with the LLM, it hadn't, a single time, actually updated the decompilation. 
 
 In my experience, the more information you can give the LLM the better.
 If we want to get more useful scripts out of the LLM, we need to update it's base knowledge which is the decompilation, and after feeding it all of this semantically rich data and the output of the attempted exploit scripts, it might actually have enough context to apply it successfully to the binary.
-<!-- llm -->
+<!-- LLM -->
 ```console
 Applied thorough IDA updates:
 - Renamed key routines: server_main, accept_fork_loop, handle_connection, dispatch_loop, drop_privileges_to_user, set_alarm_seconds, recv_checked, send_checked, send_ack, send_nack, send_tagged_blob, read_u16_le, recv_allocated_blob, command handlers cmd_*, init_flag_from_file, init_default_metadata_with_flag, metadata getters get_author/get_software/get_comment_value, and parse_ncif_container.
@@ -299,7 +298,7 @@ Even though it had done much of the reversing, I wasn't convinced it knew what i
 
 > please explain the full exploit chain
 
-<!-- llm -->
+<!-- LLM -->
 ```console
 Full exploit chain (concise)
 Server boot
@@ -531,6 +530,7 @@ if __name__ == "__main__":
     main()
 ```
 
+<!-- no-LLM -->
 ```console
 [x] Opening connection to 127.0.0.1 on port 4265
 [x] Opening connection to 127.0.0.1 on port 4265: Trying 127.0.0.1
@@ -553,7 +553,7 @@ For reference, my fake flag is `flag{WINNER_WINNER_CHICKEN_DINNER}`
 
 
 # THE MAGIC
-<!-- llm -->
+<!-- LLM -->
 ```console
 Evidence:
 Your extract: Author = 1B5B55E424237B0FF70D2DAE6D79F226
@@ -574,7 +574,7 @@ I was shocked.
 The LLM correctly infered that this was an MD5, but **ONLY** after looking at the original flag. 
 It had plenty of opportunity to make this connection prior, but maybe being given an actual flag it decided to execute tool calls to verify rather than just speculate.
 
-This was cool.
+This was cool~
 
 **BUT** We still don't have the flag.
 
@@ -805,12 +805,12 @@ My first thought upon just running the script was that the LLM cheated. I though
 
 But I read the code... And I read it again... And then I had 3 teammates test the code.
 
-**Fuck.**
+`Fuck.`
 
 This actually worked. With almost zero human effort, I was able to ask, prod, and plead with an LLM to make an exploit for a DEF CON Finals level challenge. 
 
 Who better to explain the final exploit than the LLM who made it:
-<!-- llm -->
+<!-- LLM -->
 ```console
 0x10 enables the session (ACK).
 0x22 creates a default entry: it sets type at offset +48 to 2 (path mode), Author to g_FlagString (MD5-hex of /flag), Software to "ico v0.1".
@@ -823,7 +823,7 @@ Who better to explain the final exploit than the LLM who made it:
 DEF CON Finals CTF is an Attack and Defense CTF and now that we have an exploit, we need to defend against it.
 
 But really, what if we just asked the LLM.
-Seriously, it only took 2 more prompts.
+Seriously, `it only took 2 more prompts`.
 
 > Holy shit the script works!
 > Please tell me how and where I need to patch it in the binary alongside a detailed explanation of the exploit
@@ -974,10 +974,10 @@ Doing this in a loop should give you some pretty decent output.
 
 I don't think that you can take this approach and solve every CTF challenge out there, a few, I'm sure, but not the majority.
 
-`Is CTF dead?`
+`Is CTF dead?`  
 Surely not, we adapt, we overcome, we won't let the LLMs win.
 
-`Is CTF changed?`
+`Is CTF changed?`  
 Yeah, I think so.
 This was not possible a year ago, the advent of LLMs are creeping into every aspect of our lives, even CTF.
 We'll just have to make challenges more resistant to LLMs like we have before with any new improvement to challenge solving.

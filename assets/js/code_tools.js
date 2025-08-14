@@ -184,6 +184,56 @@
           };
           const label = labelMap[lang] || 'OUTPUT';
           fig.setAttribute('data-output-label', label);
+
+          // Detect preceding HTML comment marker <!-- llm --> and tag block
+          try {
+            const detectNearestMarker = (function buildDetector() {
+              const classify = (n) => {
+                if (!n || n.nodeType !== Node.COMMENT_NODE) return '';
+                const v = String(n.nodeValue || '');
+                if (/\bno-llm\b/i.test(v)) return 'no-llm';
+                if (/\bllm\b/i.test(v)) return 'llm';
+                return '';
+              };
+              const scanPrevSiblings = (startNode, limit = 20) => {
+                let prev = startNode && startNode.previousSibling;
+                let hops = 0;
+                while (prev && hops < limit) {
+                  const k = classify(prev);
+                  if (k) return k;
+                  if (prev.nodeType === Node.ELEMENT_NODE) {
+                    const kids = Array.from(prev.childNodes || []);
+                    for (let i = kids.length - 1, ih = 0; i >= 0 && ih < 50; i--, ih++) {
+                      const k2 = classify(kids[i]);
+                      if (k2) return k2;
+                    }
+                  }
+                  prev = prev.previousSibling;
+                  hops += 1;
+                }
+                return '';
+              };
+              return function detect(node) {
+                // 1) Nearest marker among previous siblings of figure/highlight node
+                let found = scanPrevSiblings(node, 20);
+                if (found) return found;
+                // 2) Nearest among previous siblings of the wrapper (.highlighter-rouge)
+                const wrapper = node.closest('.highlighter-rouge');
+                if (wrapper) {
+                  found = scanPrevSiblings(wrapper, 20);
+                  if (found) return found;
+                }
+                return '';
+              };
+            })();
+
+            const marker = detectNearestMarker(fig);
+            if (marker === 'no-llm') {
+              fig.classList.remove('is-llm');
+            } else if (marker === 'llm') {
+              fig.classList.add('is-llm');
+            }
+          } catch (_) {}
           return;
         }
         if (lang && lang !== 'python') return;

@@ -143,6 +143,23 @@ figure.highlight.is-output::after,
   background: linear-gradient(180deg, #34d399, #10b981); /* green rail */
 }
 
+/* LLM variant: cyan/magenta rail on light theme */
+figure.highlight.is-output.is-llm,
+.highlighter-rouge > .highlight.is-output.is-llm {
+  background: #f7f7f7;
+}
+
+figure.highlight.is-output.is-llm::after,
+.highlighter-rouge > .highlight.is-output.is-llm::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #00ffff, #ff00ff);
+}
+
 /* Language badges for STDIO-style outputs */
 code.language-stdio::before,
 code.language-stdout::before,
