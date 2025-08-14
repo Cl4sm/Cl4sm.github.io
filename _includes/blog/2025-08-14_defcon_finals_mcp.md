@@ -8,9 +8,10 @@ All of this to say that DEF CON CTF **IS** the Olympics of hacking, the grand fi
 The challenges are hard, and the teams are stacked with top talent.
 
 # TL;DR
-We had some excellent hackers from our team working on the challenge for about four hours prior to my starting, such as `salls`, `x3ero0`, `crowell`, etc.
 After spending two years with LLMs for [AIxCC](https://aicyberchallenge.com), I've come to have a feeling for the boundary of what LLMs are and are not capable of.
-This is the **FIRST** time I've seen a challenge at the level of difficulty of DEF CON Finals CTF solved purely with LLMs (extremely little human interaction). I thought it was important for everyone else in the community to see it happen too!
+This is the **FIRST** time I've seen a challenge at the difficulty level of DEF CON Finals CTF solved purely with LLMs (extremely little human interaction).
+We had some excellent hackers from our team working on the challenge `"ico"` for about four hours prior to my starting (`salls`, `x3ero0`, `zardus`, etc.), so it's not like this was exactly an easy challenge.
+I thought it was important for everyone else in the community to see it happen too!
 
 (You can download my full transcript w/ the LLM in Cursor at the end of the page)
 
