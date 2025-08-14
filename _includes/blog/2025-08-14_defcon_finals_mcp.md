@@ -995,4 +995,4 @@ Thanks for reading,
 
 ### Downloads
 
-- <a href="{{ '/assets/blog/2025-08-13_defcon_finals_mcp/cursor_reverse_engineering_a_server_app.md' | relative_url }}" download>cursor_transcript.md</a> (Does not contain tool calls unfortunately)
+- <a href="{{ '/assets/blog/2025-08-14_defcon_finals_mcp/cursor_reverse_engineering_a_server_app.md' | relative_url }}" download>cursor_transcript.md</a> (Does not contain tool calls unfortunately)

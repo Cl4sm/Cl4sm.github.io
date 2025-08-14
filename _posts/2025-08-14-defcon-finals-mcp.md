@@ -7,4 +7,4 @@ permalink: /blog/defcon-finals-mcp/
 code_tools: true
 private: false
 ---
-{% include blog/2025-08-13_defcon_finals_mcp.md %}
+{% include blog/2025-08-14_defcon_finals_mcp.md %}
