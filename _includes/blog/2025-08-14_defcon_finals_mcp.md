@@ -38,6 +38,7 @@ Shellphish had a busy DEF CON this year with both the Final CTF and our AIxCC su
 As one of the leads for our AIxCC team, I was running around the con and hadn't had much time to look at any challenges until the second day after the game closed.
 `"ico"` was one of the challenges dropped halfway through the second day by the organizers and was already being worked on by several of my 1337 team members.
 I came in late and decided to hop on, as I'm generally decent at rev/pwn, and it seemed like we hadn't made too much progress.
+There was already an interaction script called `poc_ncif.py`, but all it did was send 3 null-bytes using `pwntools`.
 Some people were still rev'ing, and others were trying to set up fuzzers to see what low hanging fruit we could find.
 
 # MCP is too much for me
