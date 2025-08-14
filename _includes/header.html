@@ -10,10 +10,10 @@
         <li class="menu-item"><span class="powerline-arrow">»</span> <a href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a></li>
         {%- endif -%}
       {%- endfor -%}
-      <li class="menu-item"><span class="powerline-arrow">»</span> <a href="#publications">publications</a></li>
-      <li class="menu-item"><span class="powerline-arrow">»</span> <a href="#media">media</a></li>
-      <li class="menu-item"><span class="powerline-arrow">»</span> <a href="#awards">awards</a></li>
-      <li class="menu-item"><span class="powerline-arrow">»</span> <a href="#teaching">teaching</a></li>
+      <li class="menu-item"><span class="powerline-arrow">»</span> <a href="{{ '/' | relative_url }}#publications">publications</a></li>
+      <li class="menu-item"><span class="powerline-arrow">»</span> <a href="{{ '/' | relative_url }}#media">media</a></li>
+      <li class="menu-item"><span class="powerline-arrow">»</span> <a href="{{ '/' | relative_url }}#awards">awards</a></li>
+      <li class="menu-item"><span class="powerline-arrow">»</span> <a href="{{ '/' | relative_url }}#teaching">teaching</a></li>
     </ul>
     <div class="menu-right"><a class="blog-button" href="{{ '/blog/' | relative_url }}">blog</a></div>
   </div>
