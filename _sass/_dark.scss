@@ -225,6 +225,23 @@ figure.highlight.is-output::after,
   background: linear-gradient(180deg, #34d399, #10b981); /* green rail */
 }
 
+/* LLM console/output variant: distinct cyan/magenta rail */
+figure.highlight.is-output.is-llm,
+.highlighter-rouge > .highlight.is-output.is-llm {
+  background: var(--code-bg);
+}
+
+figure.highlight.is-output.is-llm::after,
+.highlighter-rouge > .highlight.is-output.is-llm::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #00ffff, #ff00ff);
+}
+
 @media (max-width: 768px) {
   body {
     padding: 1rem;

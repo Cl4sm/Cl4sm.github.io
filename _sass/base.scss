@@ -5,7 +5,7 @@
  * Style variables
  */
 $base-font-family: 'Source Code Pro', monospace !default;
-$base-font-size: 12.5px !default;
+$base-font-size: 13px !default;
 $mobile-font-size: 12px !default;
 $base-line-height: 1.5 !default;
 $container-width: 90% !default;
@@ -55,6 +55,14 @@ img {
     // filter: grayscale(100%);
     // -webkit-filter: grayscale(100%);
 
+}
+
+/* Make images inside blog posts full-width and responsive */
+article.blog-post .about-content img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0.5rem 0 1rem;
 }
 
 a {

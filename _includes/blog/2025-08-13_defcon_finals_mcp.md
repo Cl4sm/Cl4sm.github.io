@@ -1,15 +1,15 @@
 # DEF CON CTF
 Every year world-class teams play difficult CTFs such as Plaid CTF and HITCON CTF in an attempt to qualify for DEF CON CTF by getting first place.
-There are usually only 3-4 CTFs a year that have the right to be a pre-qualifying event.
+There are usually only 3-4 CTFs a year preordained with the right of a pre-qualifying event.
 DEF CON CTF also has a semi-finals where anywhere between the top 8-12 teams will also qualify for the finals.
 DEF CON CTF is a halmark of DEF CON itself, having been around almost as long.
 It has attracted (and still does) top hackers that influence cyber-security itself such as GeoHot, Zardus, Lokihardt, etc..
-This is to say that DEF CON CTF **IS** the olympics of hacking, the gran-finale if you will.
+All of this to say that DEF CON CTF **IS** the olympics of hacking, the gran-finale if you will.
 The challenges are hard, and the teams are stacked with top talent.
 
 # "ico"
-This challenge consists of a single x86-64 binary that spins up a server on port 4265.
-It's not quite statically linked, but uses only a few library functions despite being 1.4M in size and having almost 6k functions.
+This challenge consists of a single `x86-64` binary that spins up a server on port `4265`.
+It's not quite statically linked, but uses only a few library functions despite being `1.4M` in size and having almost `6k` functions.
 ```console
 [*] '/home/clasm/ctfs/dc-finals-25/ico/ico'
     Arch:     amd64-64-little
@@ -19,7 +19,7 @@ It's not quite statically linked, but uses only a few library functions despite 
     PIE:      No PIE (0x400000)
 ```
 
-Interestingly, there's no PIE or canary making overflows easier to exploit.
+Interestingly, there's no `PIE` or `stack canary` making overflows easier to exploit.
 Initially connecting to the server and sending manual random values gives no output.
 There program forks on every new connection.
 There is also a huge dispatch loop or VM which appears to take in bytes and execute different instructions depending on said bytes.
@@ -31,28 +31,30 @@ We had some excellent hackers from our team working on the challenge for about 4
 After spending 2 years with LLMS for [AIxCC](https://aicyberchallenge.com) I've come to have a feeling for the boundary of what LLMs are and are not capable of.
 This is the **FIRST** time I've seen a challenge at the level of difficulty of DEF CON Finals CTF solved purely with LLMs (extremely little human interaction). I thought it was important for everyone else in the community to see it happen too!
 
+(You can download my full transcript w/ the LLM in cursor at the end of the page)
+
 # Background
-Shellphish had a busy DEF CON this year with both the final ctf and our [AIxCC](https://aicyberchallenge.com) submission.
+Shellphish had a busy DEF CON this year with both the final ctf and our AIxCC submission.
 As one of the leads for our AIxCC team I was running around the con and hadn't had much time to look at any challenges until the 2nd day after the game closed.
 "ico" was one of the challenges dropped half-way through the 2nd day by the organizers and was already being worked on by several of my 1337 team members.
 I came in late and decided to hop on as I'm generally decent at rev/pwn and it seemed like we hadn't made too much progress, some people were still rev'ing and others were trying to set up fuzzers to see what we could find.
 
 # MCP is too much for me
-One of my teammates, mahaloz, had set up an (IDA MCP server)[https://github.com/mrexodia/ida-pro-mcp] for a different challenge, viper, but hadn't had much luck in using it, however, some others were having success with pasting raw decomp into the GPT console (lol).
+One of my teammates, mahaloz, had set up an [IDA MCP server](https://github.com/mrexodia/ida-pro-mcp) for a different challenge, viper, but hadn't had much luck in using it, however, some others were having success with pasting raw decompilation and instructions into the GPT console (lol).
 The team blue water also solved 2 live-ctf challenges with agents that were just running in the background. Though less complex than most other DEF CON challenges, it was part of the inspiration.
 
-We were about to have a team meeting, so I made a quick docker container to run the challenge so I didn't destroy my normal environment and brought up my own IDA MCP + cursor (GPT-5 just came out and had a bunch of free tokens available through cursor) to let it run on a partially reversed "ico" with the initial prompt:
+We were about to have a team meeting, so I made a quick docker container to run the challenge so I didn't destroy my normal environment and brought up my own IDA MCP + cursor (`GPT-5` just came out and had a bunch of free tokens available through cursor) to let it run on a partially reversed `"ico"` with the initial prompt:
 
 > You are the most amazing reverse engineer I've ever met. 
 > Use the Ida pro MCP to interact and reverse the binary.
 > We're looking at a server application, but we don't know much more than that.
 > Feel free to ask me anything you need more information on or any important decisions that need to be made
 
-This was my first use of GPT-5, and I'll say: it ran.
+This was my first use of `GPT-5`, and I'll say: it ran.
 And it ran and it ran and it ran.
-This model used the most amount of tool calls I'd ever seen, even after experimenting with claude-4-sonnet, claude-4-opus, o3, etc...
+This model used the most amount of tool calls I'd ever seen, even after experimenting with `claude-4-sonnet`, `claude-4-opus`, `o3`, etc...
 Eventually the meeting ended, and I was able to look at the results.
-It ran for at least 12 minutes entirely unassisted and gave us our first taste of hope.
+It ran for at least `12 minutes` entirely unassisted and gave us our first taste of hope.
 
 # The Script of Disappointment
 <!-- filename: disappointment.py -->
@@ -104,15 +106,28 @@ I immediately ran the script and was disappointed to find out that it ran but di
 But that's to be expected from AI slop right?
 
 It did, however, give some pretty interesting findings alongside this defunct script:
-> On each connection, before handling commands, it loads the contents of /flag into a global string buffer off_51C2E0:
->
->   idk_what_this_is_man → sets path to "/flag", reads it, stores pointer into off_51C2E0.
+<!-- llm -->
+```console
+On each connection, before handling commands, it loads the contents of /flag into a global string buffer off_51C2E0:
+  idk_what_this_is_man → sets path to "/flag", reads it, stores pointer into off_51C2E0.
 
-> 0x32: returns a packaged metadata block containing:
-> - "Author" → directly the string at +40 (which is the flag)
-> - "Comment" (only if previously set via 0x31)
-> - "Software" → the string at +72
-> - It requires one extra byte after 0x32 (any small value; used as a dimension).
+0x32: returns a packaged metadata block containing:
+- "Author" → directly the string at +40 (which is the flag)
+- "Comment" (only if previously set via 0x31)
+- "Software" → the string at +72
+- It requires one extra byte after 0x32 (any small value; used as a dimension).
+```
+
+Let's take a look at the actual decomp to see where the flag is being set and validate that what the LLM is saying is true.
+
+![Flag Reading Function in IDA]({{ '/images/blog/2025-08-13_defcon_finals_mcp/flag_reader.png' | relative_url }} "Flag Reading Function in IDA")
+
+In `sub_45EFE0` we see the `/flag` string and some values being passed around through function calls.
+I'm not entirely sure what these calls are doing, but the structure reeks of C++ to me, so I'll believe the LLM for now that eventually the contents of `/flag` end up in `off_51C2E0`.
+
+![Global String Screenshot from IDA]({{ '/images/blog/2025-08-13_defcon_finals_mcp/fuzyll.png' | relative_url }} "Global String IDA")
+
+We can see that initially `off_51C2E0` contains a pointer to the string `fuzyll`, a member of [Nautilus Institute](https://nautilus.institute/) (the organizers of the CTF) and the likely the author of this challenge.
 
 The LLM had also suggested to edit the script such that the output was well-formatted.
 I agreed since the original output was lackluster and I still had no idea what I was really dealing with.
@@ -271,6 +286,7 @@ I had noticed that through all of this discussion and tool calls with the llm, i
 
 In my experience, the more information you can give the LLM the better.
 If we want to get more useful scripts out of the LLM, we need to update it's base knowledge which is the decompilation, and after feeding it all of this semantically rich data and the output of the attempted exploit scripts, it might actually have enough context to apply it successfully to the binary.
+<!-- llm -->
 ```console
 Applied thorough IDA updates:
 - Renamed key routines: server_main, accept_fork_loop, handle_connection, dispatch_loop, drop_privileges_to_user, set_alarm_seconds, recv_checked, send_checked, send_ack, send_nack, send_tagged_blob, read_u16_le, recv_allocated_blob, command handlers cmd_*, init_flag_from_file, init_default_metadata_with_flag, metadata getters get_author/get_software/get_comment_value, and parse_ncif_container.
@@ -285,6 +301,7 @@ Even though it had done much of the reversing, I wasn't convinced it knew what i
 
 > please explain the full exploit chain
 
+<!-- llm -->
 ```console
 Full exploit chain (concise)
 Server boot
@@ -525,12 +542,12 @@ Parsed fields:
 - Software: ico v0.1
 
 Author (likely flag): 1B5B55E424237B0FF70D2DAE6D79F226
-[*] Closed connection to 127.0.0.1 port 4265```
+[*] Closed connection to 127.0.0.1 port 4265
 ```
 
-We're still not getting it, but at least it looks pretty right?
+We're still not getting the flag, but at least the output looks pretty right?
 
-> This is not the flag, I'm using a fake flag @flag that gets loaded into the docker
+> This is not the flag, I'm using a fake flag `@flag` that gets loaded into the docker
 
 This time I explicitly tell it what the flag looks like and that the found flag from the script is concretely not correct. 
 
@@ -538,6 +555,7 @@ For reference, my fake flag is `flag{WINNER_WINNER_CHICKEN_DINNER}`
 
 
 # THE MAGIC
+<!-- llm -->
 ```console
 Evidence:
 Your extract: Author = 1B5B55E424237B0FF70D2DAE6D79F226
@@ -789,11 +807,12 @@ My first thought upon just running the script was that the LLM cheated. I though
 
 But I read the code... And I read it again... And then I had 3 teammates test the code.
 
-Fuck.
+**Fuck.**
 
 This actually worked. With almost zero human effort, I was able to ask, prod, and plead with an LLM to make an exploit for a DEF CON Finals level challenge. 
 
 Who better to explain the final exploit than the LLM who made it:
+<!-- llm -->
 ```console
 0x10 enables the session (ACK).
 0x22 creates a default entry: it sets type at offset +48 to 2 (path mode), Author to g_FlagString (MD5-hex of /flag), Software to "ico v0.1".
@@ -943,7 +962,7 @@ But why did it work so well for this and not other challs?
 
 # Takeaways
 I think this ended up being a perfect storm.
-- New Model with heavy tool calling emphasis (GPT-5)
+- New Model with heavy tool calling emphasis (`GPT-5`)
 - Partially reversed challenge
 - Straight-ish forward path through the binary, no tricks, just reversing
 - Simple exploit required (only 10 bytes required, 5 of which are `/flag`)
@@ -973,5 +992,9 @@ I don't want to become a software engineer, or prompt engineer, etc... I want to
 
 
 Thanks for reading,
+`Clasm`
 
-@clasm
+
+### Downloads
+
+- <a href="{{ '/assets/blog/2025-08-13_defcon_finals_mcp/cursor_reverse_engineering_a_server_app.md' | relative_url }}" download>cursor_transcript.md</a> (Does not contain tool calls unfortunately)
