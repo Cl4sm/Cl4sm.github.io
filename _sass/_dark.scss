@@ -100,6 +100,13 @@ figure.highlight,
   border-radius: 4px;
   padding-top: 2rem; /* room for toolbar */
   overflow: hidden; /* prevent toolbar overlapping following content */
+  margin: 0.5rem 0 1.25rem; /* add comfortable space below code blocks */
+}
+
+/* If block is marked no-tools, remove the toolbar gap entirely */
+figure.highlight.no-tools,
+.highlighter-rouge > .highlight.no-tools {
+  padding-top: 0.75rem;
 }
 
 figure.highlight pre,
@@ -135,6 +142,87 @@ figure.highlight pre,
 .code-tools a:hover {
   color: var(--background-color);
   background: var(--base-color);
+}
+
+/* Make code text whiter/brighter for readability */
+.highlight, .highlighter-rouge, .highlighter-rouge code, .highlighter-rouge pre {
+  color: #e0e6ff; /* brighter than default text */
+}
+
+/* Console blocks extra-bright text */
+.highlighter-rouge code.language-console,
+.highlighter-rouge pre code.language-console,
+figure.highlight pre code.language-console,
+figure.highlight.is-console pre,
+.highlighter-rouge > .highlight.is-console pre,
+figure.highlight.is-console pre code {
+  color: #ffffff !important;
+}
+
+/* Ensure all nested tokens in console blocks are bright as well */
+.highlighter-rouge code.language-console *,
+.highlighter-rouge pre code.language-console *,
+figure.highlight pre code.language-console *,
+figure.highlight.is-console pre code * {
+  color: #ffffff !important;
+}
+
+/* Force-bright for wrappers that carry the language class (Rouge structure variations) */
+.language-console.highlighter-rouge .highlight,
+.language-console.highlighter-rouge .highlight pre,
+.language-console.highlighter-rouge .highlight code,
+.language-console.highlighter-rouge .highlight code span,
+.language-console .highlight,
+.language-console .highlight pre,
+.language-console .highlight code,
+.language-console .highlight code span {
+  color: #ffffff !important;
+}
+
+/* Rouge token for Generic.Output inside console blocks often stays gray; force it white */
+.language-console .highlight .go,
+.language-console.highlighter-rouge .highlight .go,
+.highlighter-rouge .language-console .go {
+  color: #ffffff !important;
+}
+/* Generic wrapper fallbacks if Rouge places language on wrapper */
+.language-console.highlighter-rouge,
+.highlighter-rouge.language-console,
+.language-stdout.highlighter-rouge,
+.highlighter-rouge.language-stdout,
+.language-hexdump.highlighter-rouge,
+.highlighter-rouge.language-hexdump {
+  color: #ffffff !important;
+}
+
+/* When code tools are disabled on a post, remove toolbar space and hide tools */
+article.blog-post[data-code-tools="false"] figure.highlight,
+article.blog-post[data-code-tools="false"] .highlighter-rouge > .highlight {
+  padding-top: 0.75rem; /* no extra top padding */
+}
+
+article.blog-post[data-code-tools="false"] .code-tools {
+  display: none !important;
+}
+
+/* Style 2: Gradient rail (no badge) for output blocks */
+figure.highlight.is-output,
+.highlighter-rouge > .highlight.is-output {
+  position: relative;
+  background: var(--code-bg);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03), inset 0 -1px 0 rgba(0,0,0,0.2);
+  border-color: var(--border-color);
+}
+
+figure.highlight.is-output::after,
+.highlighter-rouge > .highlight.is-output::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #34d399, #10b981); /* green rail */
 }
 
 @media (max-width: 768px) {

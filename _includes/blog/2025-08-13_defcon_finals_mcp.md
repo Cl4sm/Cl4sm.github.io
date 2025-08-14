@@ -1,4 +1,4 @@
-### DEF CON CTF
+# DEF CON CTF
 Every year world-class teams play difficult CTFs such as Plaid CTF and HITCON CTF in an attempt to qualify for DEF CON CTF by getting first place.
 There are usually only 3-4 CTFs a year that have the right to be a pre-qualifying event.
 DEF CON CTF also has a semi-finals where anywhere between the top 8-12 teams will also qualify for the finals.
@@ -7,10 +7,10 @@ It has attracted (and still does) top hackers that influence cyber-security itse
 This is to say that DEF CON CTF **IS** the olympics of hacking, the gran-finale if you will.
 The challenges are hard, and the teams are stacked with top talent.
 
-### "ico"
+# "ico"
 This challenge consists of a single x86-64 binary that spins up a server on port 4265.
 It's not quite statically linked, but uses only a few library functions despite being 1.4M in size and having almost 6k functions.
-```text
+```console
 [*] '/home/clasm/ctfs/dc-finals-25/ico/ico'
     Arch:     amd64-64-little
     RELRO:    Partial RELRO
@@ -26,18 +26,18 @@ There is also a huge dispatch loop or VM which appears to take in bytes and exec
 Everything else, we'll need to figure out...
 
 
-### The Why
+# The Why
 We had some excellent hackers from our team working on the challenge for about 4 hours prior to me starting such as salls, x3ero0, crowell, etc...
 After spending 2 years with LLMS for [AIxCC](https://aicyberchallenge.com) I've come to have a feeling for the boundary of what LLMs are and are not capable of.
 This is the **FIRST** time I've seen a challenge at the level of difficulty of DEF CON Finals CTF solved purely with LLMs (extremely little human interaction). I thought it was important for everyone else in the community to see it happen too!
 
-### Background
+# Background
 Shellphish had a busy DEF CON this year with both the final ctf and our [AIxCC](https://aicyberchallenge.com) submission.
 As one of the leads for our AIxCC team I was running around the con and hadn't had much time to look at any challenges until the 2nd day after the game closed.
 "ico" was one of the challenges dropped half-way through the 2nd day by the organizers and was already being worked on by several of my 1337 team members.
 I came in late and decided to hop on as I'm generally decent at rev/pwn and it seemed like we hadn't made too much progress, some people were still rev'ing and others were trying to set up fuzzers to see what we could find.
 
-### MCP is too much for me
+# MCP is too much for me
 One of my teammates, mahaloz, had set up an (IDA MCP server)[https://github.com/mrexodia/ida-pro-mcp] for a different challenge, viper, but hadn't had much luck in using it, however, some others were having success with pasting raw decomp into the GPT console (lol).
 The team blue water also solved 2 live-ctf challenges with agents that were just running in the background. Though less complex than most other DEF CON challenges, it was part of the inspiration.
 
@@ -54,7 +54,8 @@ This model used the most amount of tool calls I'd ever seen, even after experime
 Eventually the meeting ended, and I was able to look at the results.
 It ran for at least 12 minutes entirely unassisted and gave us our first taste of hope.
 
-### The Script of Disappointment
+# The Script of Disappointment
+<!-- filename: disappointment.py -->
 ```python
 from pwn import remote  # type: ignore
 import os, sys, time
@@ -90,7 +91,7 @@ io.send(b"\x11")
 io.close()
 ```
 
-```stdio
+```console
 [x] Opening connection to 127.0.0.1 on port 4265
 [x] Opening connection to 127.0.0.1 on port 4265: Trying 127.0.0.1
 [+] Opening connection to 127.0.0.1 on port 4265: Done
@@ -117,7 +118,8 @@ The LLM had also suggested to edit the script such that the output was well-form
 I agreed since the original output was lackluster and I still had no idea what I was really dealing with.
 > Please add a nice and clean parser!
 
-### The Script of Hope
+# The Script of Hope
+<!-- filename: hope.py -->
 ```python
 from __future__ import annotations
 
@@ -231,7 +233,7 @@ if __name__ == "__main__":
     main()
 ```
 
-```stdio
+```console
 [x] Opening connection to 127.0.0.1 on port 4265
 [x] Opening connection to 127.0.0.1 on port 4265: Trying 127.0.0.1
 [+] Opening connection to 127.0.0.1 on port 4265: Done
@@ -241,7 +243,7 @@ No parsable KV bundle. Raw chunk (153 bytes): 89504e470d0a1a0a0000000d4948445200
 
 Not only is this script huge compared to the prior one, it's well structured and actually got some nice output from the server.
 Obviously this hex string wasn't ideal so I ran it through `xxd` to get a better understanding as there were some ascii looking bytes.
-```
+```console
 00000000: 8950 4e47 0d0a 1a0a 0000 000d 4948 4452  .PNG........IHDR
 00000010: 0000 0002 0000 0002 0806 0000 0072 b60d  .............r..
 00000020: 2400 0000 1049 4441 5478 9c63 6060 60f8  $....IDATx.c```.
@@ -261,7 +263,7 @@ The `Author` slice of the bytes was definitely not the hard-coded `fuzyll` as wa
 Obviously we're getting further, but I'm not sure why the value isn't the flag!
 
 
-### Better Decompilation Better Scripts
+# Better Decompilation Better Scripts
 
 > Now take all of this information and edit the decompilation with all your new findings
 
@@ -269,19 +271,21 @@ I had noticed that through all of this discussion and tool calls with the llm, i
 
 In my experience, the more information you can give the LLM the better.
 If we want to get more useful scripts out of the LLM, we need to update it's base knowledge which is the decompilation, and after feeding it all of this semantically rich data and the output of the attempted exploit scripts, it might actually have enough context to apply it successfully to the binary.
->Applied thorough IDA updates:
-> - Renamed key routines: server_main, accept_fork_loop, handle_connection, dispatch_loop, drop_privileges_to_user, set_alarm_seconds, recv_checked, send_checked, send_ack, send_nack, send_tagged_blob, read_u16_le, recv_allocated_blob, command handlers cmd_*, init_flag_from_file, init_default_metadata_with_flag, metadata getters get_author/get_software/get_comment_value, and parse_ncif_container.
-> - Renamed global off_51C2E0 to g_FlagString.
-> - Added comments summarizing protocol and exfil path on dispatch_loop, cmd_send_metadata_bundle, init_flag_from_file, init_default_metadata_with_flag, server_main, and helpers.
+```console
+Applied thorough IDA updates:
+- Renamed key routines: server_main, accept_fork_loop, handle_connection, dispatch_loop, drop_privileges_to_user, set_alarm_seconds, recv_checked, send_checked, send_ack, send_nack, send_tagged_blob, read_u16_le, recv_allocated_blob, command handlers cmd_*, init_flag_from_file, init_default_metadata_with_flag, metadata getters get_author/get_software/get_comment_value, and parse_ncif_container.
+- Renamed global off_51C2E0 to g_FlagString.
+- Added comments summarizing protocol and exfil path on dispatch_loop, cmd_send_metadata_bundle, init_flag_from_file, init_default_metadata_with_flag, server_main, and helpers.
 
-> Impact:
+Impact:
 The decompilation now clearly reflects the protocol, the /flag loading, and the metadata flow used for exfil.
+```
 
 Even though it had done much of the reversing, I wasn't convinced it knew what it was doing so I tried to prompt it to explain the reasoning especially with what was supposed to be the flag still being a string of unknown bytes:
 
 > please explain the full exploit chain
 
-```
+```console
 Full exploit chain (concise)
 Server boot
 
@@ -349,7 +353,8 @@ It hadn't tried running the script itself at all so I thought maybe giving it ac
 
 > Okay you can now interact with it by running the python script, but I don't think the exploit is working :(
 
-### Close And Yet So Far
+# Close And Yet So Far
+<!-- filename: close.py -->
 ```python
 from __future__ import annotations
 
@@ -511,7 +516,7 @@ if __name__ == "__main__":
     main()
 ```
 
-```stdio
+```console
 [x] Opening connection to 127.0.0.1 on port 4265
 [x] Opening connection to 127.0.0.1 on port 4265: Trying 127.0.0.1
 [+] Opening connection to 127.0.0.1 on port 4265: Done
@@ -532,8 +537,9 @@ This time I explicitly tell it what the flag looks like and that the found flag 
 For reference, my fake flag is `flag{WINNER_WINNER_CHICKEN_DINNER}`
 
 
-### THE MAGIC
-```Evidence:
+# THE MAGIC
+```console
+Evidence:
 Your extract: Author = 1B5B55E424237B0FF70D2DAE6D79F226
 
 MD5(flag{WINNER_WINNER_CHICKEN_DINNER}) = 1B5B55E424237B0FF70D2DAE6D79F226 (matches)
@@ -544,7 +550,7 @@ How could this be an MD5 sum, no one reversing prior nor myself saw md5 in the b
 Maybe we just didn't look hard enough.
 
 After testing in my console:
-```
+```bash
 echo -en 'flag{WINNER_WINNER_CHICKEN_DINNER}' | md5sum
 1b5b55e424237b0ff70d2dae6d79f226  -
 ```
@@ -564,7 +570,8 @@ Then a second message after the update to try and massage the exploit script int
 
 > Now that we know this, we need to figure out how to actually get the flag because the md5sum doesn't help us, we need the flag!!!!
 
-### The Exploit 
+# The Exploit 
+<!-- filename: exploit.py -->
 ```python
 from __future__ import annotations
 
@@ -763,15 +770,15 @@ if __name__ == "__main__":
     main()
 ```
 
-```
+```console
 [x] Opening connection to 127.0.0.1 on port 4265
 [x] Opening connection to 127.0.0.1 on port 4265: Trying 127.0.0.1
 [+] Opening connection to 127.0.0.1 on port 4265: Done
 Parsed fields:
-- Author: D3EB6A66946817CD8B84F530C3083AE9
+- Author: 1B5B55E424237B0FF70D2DAE6D79F226
 - Software: ico v0.1
 
-Author (MD5 of flag): D3EB6A66946817CD8B84F530C3083AE9
+Author (MD5 of flag): 1B5B55E424237B0FF70D2DAE6D79F226
 
 Plaintext flag via comment: flag{WINNER_WINNER_CHICKEN_DOBER}
 
@@ -787,14 +794,14 @@ Fuck.
 This actually worked. With almost zero human effort, I was able to ask, prod, and plead with an LLM to make an exploit for a DEF CON Finals level challenge. 
 
 Who better to explain the final exploit than the LLM who made it:
-```
+```console
 0x10 enables the session (ACK).
 0x22 creates a default entry: it sets type at offset +48 to 2 (path mode), Author to g_FlagString (MD5-hex of /flag), Software to "ico v0.1".
 0x31 length-prefixed blob sets the Comment value at offset +56 (we send "/flag").
 0x30 returns the Comment. Because type==2, the server treats Comment as a path and returns file contents → plaintext flag.
 ```
 
-### The Patch
+# The Patch
 
 DEF CON Finals CTF is an Attack and Defense CTF and now that we have an exploit, we need to defend against it.
 
@@ -808,6 +815,7 @@ and
 
 > Use a Python script using any library you like (r2, cnaything...) and make it patch out the vulnerability in the simplest way
 
+<!-- filename: patch.py -->
 ```python
 #!/usr/bin/env python3
 """
@@ -920,7 +928,7 @@ And that's it~!
 A single byte over-write, and it worked first try.
 We deployed the patch in the morning and had no issue with the organizer's SLA checks.
 
-### The Great Vibe-ening
+# The Great Vibe-ening
 This was mind-blowing, so much so in fact that literally every person in our suite did not believe me and thought the code was somehow mis-representative of the output.
 
 But no. It got the flag. Pandemonium.
@@ -933,7 +941,7 @@ Nothing else of real substance came from this approach on other challenges.
 
 But why did it work so well for this and not other challs?
 
-### Takeaways
+# Takeaways
 I think this ended up being a perfect storm.
 - New Model with heavy tool calling emphasis (GPT-5)
 - Partially reversed challenge

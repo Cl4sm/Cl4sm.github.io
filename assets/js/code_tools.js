@@ -1,5 +1,28 @@
 // Enhance code blocks: add Copy and Download, set vertical scrolling
 (function () {
+  function getLanguage(fig) {
+    function extractFrom(el) {
+      if (!el) return '';
+      const classes = Array.from(el.classList || []);
+      const langClass = classes.find((c) => c.startsWith('language-'));
+      if (langClass) return langClass.replace('language-', '');
+      // Some themes put raw language name on the element (e.g., 'console')
+      const known = ['console', 'python', 'bash', 'shell', 'sh', 'shell-session'];
+      const direct = classes.find((c) => known.includes(c));
+      return direct || '';
+    }
+
+    const code = fig.querySelector('code');
+    const pre = fig.querySelector('pre');
+    const wrapper = fig.closest('.highlighter-rouge');
+    return (
+      extractFrom(code) ||
+      extractFrom(pre) ||
+      extractFrom(fig) ||
+      extractFrom(wrapper)
+    );
+  }
+
   function textFromPre(pre) {
     // Rouge wraps code as <pre><code>...</code></pre>
     const code = pre.querySelector('code');
@@ -17,6 +40,63 @@
     const tools = document.createElement('div');
     tools.className = 'code-tools';
     return tools;
+  }
+
+  function findDownloadName(fig, fallback) {
+    // 1) Attribute on wrapper or code
+    const code = fig.querySelector('code');
+    const attr =
+      fig.getAttribute('data-filename') ||
+      (code && (code.getAttribute('data-filename') || code.getAttribute('filename')));
+    if (attr && attr.trim()) return attr.trim();
+
+    // 2) Class hint like filename-foo_py or download-name-foo_py
+    const classes = new Set([
+      ...Array.from(fig.classList || []),
+      ...Array.from((code && code.classList) || []),
+    ]);
+    for (const cls of classes) {
+      if (cls.startsWith('filename-')) {
+        return cls.replace('filename-', '').replace(/_/g, '.');
+      }
+      if (cls.startsWith('download-name-')) {
+        return cls.replace('download-name-', '').replace(/_/g, '.');
+      }
+    }
+
+    // 3) Scan preceding siblings for HTML comments like <!-- download: name.py -->
+    function scanPrevSiblings(node, maxHops) {
+      let prev = node.previousSibling;
+      let hops = 0;
+      while (prev && hops < maxHops) {
+        if (prev.nodeType === Node.COMMENT_NODE) {
+          const m = String(prev.nodeValue || '').match(/\b(?:download|filename)\s*:\s*([^\s]+)\b/i);
+          if (m && m[1]) return m[1].trim();
+        }
+        prev = prev.previousSibling;
+        hops += 1;
+      }
+      return '';
+    }
+    const fromFig = scanPrevSiblings(fig, 10);
+    if (fromFig) return fromFig;
+    if (fig.parentNode) {
+      const fromParent = scanPrevSiblings(fig.parentNode, 10);
+      if (fromParent) return fromParent;
+    }
+
+    // 4) Magic comment inside the code itself (first 5 lines)
+    try {
+      const text = textFromPre(fig.querySelector('pre') || { innerText: '' });
+      const lines = text.split(/\r?\n/).slice(0, 5);
+      for (const line of lines) {
+        const m = line.match(/^(?:#|\/\/|;|--|%)\s*(?:download|filename)\s*:\s*([^\s]+)\b/i);
+        if (m && m[1]) return m[1].trim();
+      }
+    } catch (_) {}
+
+    // 5) Default
+    return fallback;
   }
 
   function addToolsToHighlight(fig) {
@@ -51,7 +131,10 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'code.txt';
+      // Propose a smarter default based on language
+      const lang = getLanguage(fig);
+      const ext = lang === 'python' ? 'py' : 'txt';
+      a.download = findDownloadName(fig, `code.${ext}`);
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -85,6 +168,25 @@
     document
       .querySelectorAll('figure.highlight, .highlighter-rouge > .highlight')
       .forEach((fig) => {
+        // Only add to Python blocks; skip console/stdout/hexdump/plaintext entirely
+        const lang = getLanguage(fig);
+        if (['console', 'stdout', 'hexdump', 'text', 'plaintext'].includes(lang)) {
+          // mark as no-tools so CSS can reduce top padding and style as output
+          fig.classList.add('no-tools');
+          fig.classList.add('is-output');
+          // Provide a label hint for CSS via data attribute
+          const labelMap = {
+            console: 'STDOUT',
+            stdout: 'STDOUT',
+            text: 'STDOUT',
+            plaintext: 'STDOUT',
+            hexdump: 'HEX'
+          };
+          const label = labelMap[lang] || 'OUTPUT';
+          fig.setAttribute('data-output-label', label);
+          return;
+        }
+        if (lang && lang !== 'python') return;
         if (fig.classList.contains('no-tools')) return;
         if (fig.closest('.no-tools')) return;
         const code = fig.querySelector('code');
